@@ -1,0 +1,752 @@
+fileFormatVersion: 2
+guid: e3f405695ea8cbc43a43a4b5442a0120
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Karpuz_02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2006
+      y: 2085
+      width: 610
+      height: 428
+    spriteID: 64a438ac393012c4eb44fa848e6e907d
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1786, y: 1797}
+  - name: Karpuz_01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1368
+      y: 4
+      width: 630
+      height: 567
+    spriteID: 742247f7f9c22494fa5f3ee0aed01453
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1158, y: -215}
+  - name: Karpuz
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 781
+      width: 752
+      height: 643
+    spriteID: 6ce2cfa100dae764e951ec339df8e732
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -145, y: 600}
+  - name: Nar_02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 780
+      y: 1482
+      width: 507
+      height: 713
+    spriteID: d6fb3cfc14d1bda46ba63c0a6d4e08a2
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 509, y: 1336}
+  - name: Nar_01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 780
+      y: 781
+      width: 529
+      height: 693
+    spriteID: a1cc4b848e7a2f341bcea713c694953c
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 520, y: 625}
+  - name: Nar
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1432
+      width: 661
+      height: 724
+    spriteID: d51440923e233194d86120c918a05571
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -190, y: 1291}
+  - name: Avakado_02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2006
+      y: 2521
+      width: 344
+      height: 705
+    spriteID: c956d0ae9da26f349ab911ce75b274bf
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1653, y: 2375}
+  - name: Avakado_01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2006
+      y: 1316
+      width: 351
+      height: 761
+    spriteID: 0d438585f24997847b9791d7a3f00239
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1657, y: 1194}
+  - name: Avakado
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 780
+      y: 2203
+      width: 447
+      height: 745
+    spriteID: 9beeb4ab0d680ae499173a42c5d2fc7d
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 479, y: 2073}
+  - name: "\xC7ilek_02"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2006
+      y: 438
+      width: 642
+      height: 431
+    spriteID: 32f3239699f073f4fa6afe19f1084202
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1802, y: 151}
+  - name: "\xC7ilek_01"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2006
+      y: 877
+      width: 622
+      height: 431
+    spriteID: a91f88e736cef2b4f87b1c9c7d414967
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1791, y: 589}
+  - name: "\xC7ilek"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2164
+      width: 642
+      height: 745
+    spriteID: 9f20f8e19acc4dd4e916e19ee33f6778
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -199, y: 2034}
+  - name: Portakal_02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 3617
+      width: 647
+      height: 464
+    spriteID: add43a8247eb50d43aaac2b3d1227b20
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -197, y: 3346}
+  - name: Portakal_01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2006
+      y: 4
+      width: 682
+      height: 426
+    spriteID: b630cb959b37d2d40a89d7c524455dc8
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1822, y: -286}
+  - name: Portakal
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2917
+      width: 682
+      height: 692
+    spriteID: 8e1ccdf7161cb9348a6a563422d344e8
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -180, y: 2760}
+  - name: Armut_02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 780
+      y: 2956
+      width: 445
+      height: 641
+    spriteID: 4e4aeccc2c95f6a499ceb724eac61503
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 478, y: 2774}
+  - name: Armut_01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 780
+      y: 4
+      width: 580
+      height: 769
+    spriteID: 5720a5c693473b847a276aada4cf4cbd
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 546, y: -114}
+  - name: Armut
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 768
+      height: 769
+    spriteID: 15d87552a657317488af05e8a6b4970c
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -137, y: -114}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  sharedRigSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: iPhone
+    overridden: 0
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: WebGL
+    overridden: 0
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 1024
+  documentSize: {x: 1024, y: 1024}
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  skeletonAssetReferenceID: 
+  spriteCategoryList:
+    categories: []
+  textureActualWidth: 4096
+  textureActualHeight: 4096
+  spritePackingTag: 
+  resliceFromLayer: 0
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Karpuz
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: 63
+    mosaicPosition: {x: 0, y: 0}
+  - name: Karpuz_02
+    spriteName: Karpuz_02
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 64a438ac393012c4eb44fa848e6e907d
+    layerID: 45
+    mosaicPosition: {x: 2006, y: 2085}
+  - name: Karpuz_01
+    spriteName: Karpuz_01
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 742247f7f9c22494fa5f3ee0aed01453
+    layerID: 44
+    mosaicPosition: {x: 1368, y: 4}
+  - name: Karpuz
+    spriteName: Karpuz
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 6ce2cfa100dae764e951ec339df8e732
+    layerID: 11
+    mosaicPosition: {x: 4, y: 781}
+  - name: Nar
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: 65
+    mosaicPosition: {x: 0, y: 0}
+  - name: Nar_02
+    spriteName: Nar_02
+    isGroup: 0
+    parentIndex: 4
+    spriteID: d6fb3cfc14d1bda46ba63c0a6d4e08a2
+    layerID: 61
+    mosaicPosition: {x: 780, y: 1482}
+  - name: Nar_01
+    spriteName: Nar_01
+    isGroup: 0
+    parentIndex: 4
+    spriteID: a1cc4b848e7a2f341bcea713c694953c
+    layerID: 62
+    mosaicPosition: {x: 780, y: 781}
+  - name: Nar
+    spriteName: Nar
+    isGroup: 0
+    parentIndex: 4
+    spriteID: d51440923e233194d86120c918a05571
+    layerID: 10
+    mosaicPosition: {x: 4, y: 1432}
+  - name: Avakado
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: 89
+    mosaicPosition: {x: 0, y: 0}
+  - name: Avakado_02
+    spriteName: Avakado_02
+    isGroup: 0
+    parentIndex: 8
+    spriteID: c956d0ae9da26f349ab911ce75b274bf
+    layerID: 87
+    mosaicPosition: {x: 2006, y: 2521}
+  - name: Avakado_01
+    spriteName: Avakado_01
+    isGroup: 0
+    parentIndex: 8
+    spriteID: 0d438585f24997847b9791d7a3f00239
+    layerID: 82
+    mosaicPosition: {x: 2006, y: 1316}
+  - name: Avakado
+    spriteName: Avakado
+    isGroup: 0
+    parentIndex: 8
+    spriteID: 9beeb4ab0d680ae499173a42c5d2fc7d
+    layerID: 9
+    mosaicPosition: {x: 780, y: 2203}
+  - name: "\xC7ilek"
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: 112
+    mosaicPosition: {x: 0, y: 0}
+  - name: "\xC7ilek_02"
+    spriteName: "\xC7ilek_02"
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 32f3239699f073f4fa6afe19f1084202
+    layerID: 104
+    mosaicPosition: {x: 2006, y: 438}
+  - name: "\xC7ilek_01"
+    spriteName: "\xC7ilek_01"
+    isGroup: 0
+    parentIndex: 12
+    spriteID: a91f88e736cef2b4f87b1c9c7d414967
+    layerID: 111
+    mosaicPosition: {x: 2006, y: 877}
+  - name: "\xC7ilek"
+    spriteName: "\xC7ilek"
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 9f20f8e19acc4dd4e916e19ee33f6778
+    layerID: 4
+    mosaicPosition: {x: 4, y: 2164}
+  - name: portakal
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: 123
+    mosaicPosition: {x: 0, y: 0}
+  - name: Portakal_02
+    spriteName: Portakal_02
+    isGroup: 0
+    parentIndex: 16
+    spriteID: add43a8247eb50d43aaac2b3d1227b20
+    layerID: 119
+    mosaicPosition: {x: 4, y: 3617}
+  - name: Portakal_01
+    spriteName: Portakal_01
+    isGroup: 0
+    parentIndex: 16
+    spriteID: b630cb959b37d2d40a89d7c524455dc8
+    layerID: 122
+    mosaicPosition: {x: 2006, y: 4}
+  - name: Portakal
+    spriteName: Portakal
+    isGroup: 0
+    parentIndex: 16
+    spriteID: 8e1ccdf7161cb9348a6a563422d344e8
+    layerID: 5
+    mosaicPosition: {x: 4, y: 2917}
+  - name: Armut
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: 137
+    mosaicPosition: {x: 0, y: 0}
+  - name: Armut_02
+    spriteName: Armut_02
+    isGroup: 0
+    parentIndex: 20
+    spriteID: 4e4aeccc2c95f6a499ceb724eac61503
+    layerID: 134
+    mosaicPosition: {x: 780, y: 2956}
+  - name: Armut_01
+    spriteName: Armut_01
+    isGroup: 0
+    parentIndex: 20
+    spriteID: 5720a5c693473b847a276aada4cf4cbd
+    layerID: 136
+    mosaicPosition: {x: 780, y: 4}
+  - name: Armut
+    spriteName: Armut
+    isGroup: 0
+    parentIndex: 20
+    spriteID: 15d87552a657317488af05e8a6b4970c
+    layerID: 6
+    mosaicPosition: {x: 4, y: 4}
+  sharedRigPSDLayers: []
+  generateGOHierarchy: 0
+  textureAssetName: "Meyveler kesilmi\u015F_01 (1) Texture"
+  prefabAssetName: "Meyveler kesilmi\u015F_01 (1) Prefab"
+  spriteLibAssetName: "Meyveler kesilmi\u015F_01 (1) Sprite Lib"
+  skeletonAssetName: "Meyveler kesilmi\u015F_01 (1) Skeleton"
+  secondarySpriteTextures: []
