@@ -17,7 +17,7 @@ namespace _Environments._Local
         {
             Guid GuestUUID = Guid.NewGuid();
 
-            string destination = Application.persistentDataPath + "/guestuuidsave.txt";
+            string destination = Application.persistentDataPath + "/guestuuidsave.dat";
             FileStream file;
 
             if (File.Exists(destination)) 
@@ -38,7 +38,7 @@ namespace _Environments._Local
 
         public static void LoadFile()
         {
-            string destination = Application.persistentDataPath + "/guestuuidsave.txt";
+            string destination = Application.persistentDataPath + "/guestuuidsave.dat";
             FileStream file;
 
             if (File.Exists(destination)) file = File.OpenRead(destination);
