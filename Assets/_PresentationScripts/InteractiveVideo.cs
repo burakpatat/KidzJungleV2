@@ -69,16 +69,20 @@ public class InteractiveVideo : MonoBehaviour
 
         foreach (var row in _datas)
         {
-            if (row.id == 1)
+            if (row.id == KovukList.Instance.ClickPosterID)
             {
                 //openVideo
                 vCR._videoFiles.Add(GetInteractiveVideo.GetMedia() + row.videofile);
                 vCR.OnOpenVideoFile();
 
-                _QuestionCount = (row.questions.Count + 1) - row.questions.Count;
+                //IS INTERACTIVE
+                if(row.isInteractive != null)
+                {
+                    _QuestionCount = (row.questions.Count + 1) - row.questions.Count;
+                    GetButtton();
+                }
             }
         }
-        GetButtton();
     }
     void GetButtton()
     {
@@ -118,7 +122,7 @@ public class InteractiveVideo : MonoBehaviour
 
         foreach (var row in _datas)
         {
-            if (row.id == 1)
+            if (row.id == KovukList.Instance.ClickPosterID && row.isInteractive != null)
             {    
                 if (!NewQuestion)
                 {

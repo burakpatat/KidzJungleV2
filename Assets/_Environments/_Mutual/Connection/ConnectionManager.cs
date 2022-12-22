@@ -145,15 +145,20 @@ namespace _Environments._Mutual.Connection
             _profiledatas = GetProfile.ProfileClass.data;
             foreach (var row in _profiledatas)
             {
-                AuthID = row.KJId;
-                AuthName = row.name;
-                ParentName = row.name;
-
-                for (int i = 0; i < row.Child.Count; i++)
+                if (Profile.Instance.guestProfileRegister == false)
                 {
-                    ChildsName.Add(row.Child[i].childname);
-                }
+                    if(row.name == "Guest")
+                    {
+                        AuthID = row.KJId;
+                        AuthName = row.name;
+                        ParentName = row.name;
 
+                        for (int i = 0; i < row.Child.Count; i++)
+                        {
+                            ChildsName.Add(row.Child[i].childname);
+                        }
+                    }
+                }
             }
         }
     }

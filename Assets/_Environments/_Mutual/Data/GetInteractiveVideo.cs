@@ -10,11 +10,12 @@ namespace _Environments._Mutual.Data
 {
     public class GetInteractiveVideo : AbstractGetData
     {
+        public static int _CloumnCount = 0;
         public static int _PositionCloumnCount = 0;
         public static InteractiveVideoClass InteractiveVideoClass;
         public static IEnumerator GetIVDatas()
         {
-            string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/items/InteractiveVideo?fields=*,questions.*,questions.pos.*");
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/items/InteractiveVideo?fields=*,questions.*,questions.pos.*,category.Categories_id.*");
             yield return GetResultResponse(GetTarget.BASE, new string[1], mainUrl);
             yield return new WaitUntil(() => _GETResponseResult != "");
 
@@ -22,6 +23,7 @@ namespace _Environments._Mutual.Data
             {
                 InteractiveVideoClass _datas = new InteractiveVideoClass();
                 _datas = JsonUtility.FromJson<InteractiveVideoClass>(_GETResponseResult);
+                _CloumnCount = _datas.data.Count;
                 InteractiveVideoClass = _datas;
             }
             catch (System.Exception ex)

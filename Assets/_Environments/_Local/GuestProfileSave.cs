@@ -13,6 +13,7 @@ namespace _Environments._Local
     public class GuestProfileSave
     {
         public static string GUESTUUID;
+        public static bool FILEFOUND = false;
         public static void SaveFile()
         {
             Guid GuestUUID = Guid.NewGuid();
@@ -41,10 +42,15 @@ namespace _Environments._Local
             string destination = Application.persistentDataPath + "/guestuuidsave.dat";
             FileStream file;
 
-            if (File.Exists(destination)) file = File.OpenRead(destination);
+            if (File.Exists(destination))
+            {
+                file = File.OpenRead(destination);
+                FILEFOUND = true;
+            }
             else
             {
                 UnityEngine.Debug.LogError("File not found");
+                FILEFOUND = false;
                 return;
             }
 

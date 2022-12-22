@@ -11,7 +11,22 @@ namespace _Environments._Mutual.Data.State
         public int id;
         public string videofile;
         public string videoname;
+        public List<string> isInteractive;
+        public string videoThumbnail;
+        public List<Category> category;
         public List<Question> questions;
+    }
+    [Serializable]
+    public class CategoriesId
+    {
+        public List<string> base_categories;
+        public List<string> sub_categories;
+        public string category_title;
+    }
+    [Serializable]
+    public class Category
+    {
+        public CategoriesId Categories_id;
     }
     [Serializable]
     public class Pos
