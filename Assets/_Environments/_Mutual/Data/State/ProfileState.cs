@@ -25,10 +25,8 @@ namespace _Environments._Mutual.Data.State
     public class Profile_Data
     {
         public int id;
-        public string status;
         public string KJId;
         public string name;
-        public string mail;
         public List<Profile_Child> Child;
     }
     [Serializable]
