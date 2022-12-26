@@ -41,7 +41,7 @@ public class KovukList : MonoBehaviour
     public TMP_Text UserNameText;
     public Transform Posters;
 
-    List<IVData> _datas = new List<IVData>();
+    List<Video_Data> _datas = new List<Video_Data>();
 
     public int ClickPosterID;
     void Start()
@@ -51,13 +51,13 @@ public class KovukList : MonoBehaviour
 
     void InitData()
     {
-        _datas = GetInteractiveVideo.InteractiveVideoClass.data;
+        _datas = GetVideo.VideoClass.data;
 
         GetList();
     }
     void GetList()
     {
-        int cloumnCount = GetInteractiveVideo._CloumnCount;
+        int cloumnCount = GetVideo._CloumnCount;
         for (int i = 0; i < cloumnCount; i++)
         {
             var _intanceObj = Instantiate(PosterButton, PosterTransform[i].transform.position, Quaternion.identity);
@@ -66,7 +66,7 @@ public class KovukList : MonoBehaviour
             _intanceObj.transform.localScale = Vector3.one;
 
             //image
-            StartCoroutine(SetPoster(GetInteractiveVideo.GetMedia() + _datas[i].videoThumbnail, _datas[i].videoname, _intanceObj.transform.GetChild(0)));
+            StartCoroutine(SetPoster(GetVideo.GetMedia() + _datas[i].videoThumbnail, _datas[i].videoname, _intanceObj.transform.GetChild(0)));
             _intanceObj.transform.GetChild(1).gameObject.SetActive(true);
 
             foreach (var prow in ConnectionManager.Instance._profiledatas)

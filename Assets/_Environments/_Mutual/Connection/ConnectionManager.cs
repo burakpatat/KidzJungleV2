@@ -35,12 +35,6 @@ namespace _Environments._Mutual.Connection
         [SerializeField]
         private string _ActiveToken;
 
-        [SerializeField]
-        private bool _PremiumStatus;
-
-        [SerializeField]
-        private string _Language;
-
         [Header("Auth Info")]
         [SerializeField]
         private string _AuthID;
@@ -51,14 +45,13 @@ namespace _Environments._Mutual.Connection
         [SerializeField]
         private List<string> _ChildsName;
 
+        [HideInInspector] public List<User_Data> _userdatas = new List<User_Data>();
         [HideInInspector] public List<Profile_Data> _profiledatas = new List<Profile_Data>();
 
         public string BaseUrl { get => _BaseUrl; set => _BaseUrl = value; }
         public string ActiveToken { get => _ActiveToken; set => _ActiveToken = value; }
-        public bool PremiumStatus { get => _PremiumStatus; set => _PremiumStatus = value; }
-        public string Language { get => _Language; set => _Language = value; }
 
-        public string AuthID { get => _AuthID; set => _AuthID = value; }
+        public string AuthID_KJ { get => _AuthID; set => _AuthID = value; }
         public string AuthName { get => _AuthName; set => _AuthName = value; }
         public string ParentName { get => _ParentName; set => _ParentName = value; }
         public List<string> ChildsName { get => _ChildsName; set => _ChildsName = value; }
@@ -66,13 +59,9 @@ namespace _Environments._Mutual.Connection
         {
             String mainUrl = String.Empty;
             String token = String.Empty;
-            String premiumStatus = String.Empty;
-            String language = String.Empty;
 #if TEST
             mainUrl = "https://kidzjungle.directus.app";
             token = "CrxfNKnyvKrYkFTo1vrYIZMcL81VCnAI";
-            premiumStatus = "0";
-            language = "tr-TR";
 #elif PROD
             mainUrl = "https://api.kidzjungle.com/kidsvid";
             token = "01fcd8d0-ae90-4740-9928-59051e9ec067";
@@ -87,11 +76,6 @@ namespace _Environments._Mutual.Connection
             Debug.Log("Cache cleared : " + cleared);
             BaseUrl = mainUrl;
             ActiveToken = token;
-            if (premiumStatus.Equals(0))
-            {
-                PremiumStatus = false;
-            }
-            Language = language;
 #elif UNITY_ANDROID
             Debug.Log("Android PLATFORM VERSION STARTED");
             Debug.Log("Caching size : " + Caching.cacheCount + " - " + Caching.ready);
@@ -100,11 +84,6 @@ namespace _Environments._Mutual.Connection
             Debug.Log("Cache cleared : " + cleared);
             BaseUrl = mainUrl;
             ActiveToken = token;
-            if (premiumStatus.Equals(0))
-            {
-                PremiumStatus = false;
-            }
-            Language = language;
 
 #elif STANDALONE
             Debug.Log("STANDALONE VERSION STARTED");
@@ -128,7 +107,7 @@ namespace _Environments._Mutual.Connection
             yield return authInfo();
 
             yield return GetGame.GetGameDatas();
-            yield return GetInteractiveVideo.GetIVDatas();
+            yield return GetVideo.GetVideoDatas();
             
 
             Debug.Log("Base Loaded");
@@ -140,26 +119,32 @@ namespace _Environments._Mutual.Connection
 
         IEnumerator authInfo()
         {
-            yield return GetProfile.GetProfileDatas();
+            yield return GetUser.GetUserDatas();
+            _userdatas = GetUser.UserClass.data;
 
-            _profiledatas = GetProfile.ProfileClass.data;
-            foreach (var row in _profiledatas)
+            foreach (var row in _userdatas)
             {
                 if (Profile.Instance.guestProfileRegister == false)
                 {
-                    if(row.name == "Guest")
+                    for (int i = 0; i < row.profile.Count; i++)
                     {
-                        AuthID = row.KJId;
-                        AuthName = row.name;
-                        ParentName = row.name;
-
-                        for (int i = 0; i < row.Child.Count; i++)
+                        if (row.profile[i].name == "Guest")
                         {
-                            ChildsName.Add(row.Child[i].childname);
+                            AuthID_KJ = row.profile[i].KJId;
+                            AuthName = row.profile[i].name;
+                            ParentName = row.profile[i].name;
+
+                            for (int a = 0; a < row.profile[i].Child.Count; a++)
+                            {
+                                ChildsName.Add(row.profile[i].Child[a].childname);
+                            }
                         }
                     }
                 }
             }
+
+            yield return GetProfile.GetProfileDatas();
+            _profiledatas = GetProfile.ProfileClass.data;
         }
     }
 }

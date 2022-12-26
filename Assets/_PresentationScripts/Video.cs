@@ -18,7 +18,7 @@ public enum QuestionTime
     SecondWrongTime,
     TrueTime,
 }
-public class InteractiveVideo : MonoBehaviour
+public class Video : MonoBehaviour
 {
     public VCR vCR;
     public TextMeshProUGUI fpsText;
@@ -32,7 +32,7 @@ public class InteractiveVideo : MonoBehaviour
 
     public List<Transform> ButtonList;
 
-    List<IVData> _datas = new List<IVData>();
+    List<Video_Data> _datas = new List<Video_Data>();
 
     bool b_InTime = false;
     bool b_SATime = false;
@@ -58,6 +58,8 @@ public class InteractiveVideo : MonoBehaviour
     [SerializeField] bool b_QuestionSWrongState = false;
     [SerializeField] bool b_QuestionTrueState = false;
     bool b_WrongQuestionOutTime = false;
+
+    bool b_IsInteractive = false;
     void Start()
     {
         Invoke("InitData", 1.2f);
@@ -65,22 +67,28 @@ public class InteractiveVideo : MonoBehaviour
     }
     void InitData()
     {
-        _datas = GetInteractiveVideo.InteractiveVideoClass.data;
+        _datas = GetVideo.VideoClass.data;
 
         foreach (var row in _datas)
         {
             if (row.id == KovukList.Instance.ClickPosterID)
             {
                 //openVideo
-                vCR._videoFiles.Add(GetInteractiveVideo.GetMedia() + row.videofile);
+                vCR._videoFiles.Add(GetVideo.GetMedia() + row.videofile);
                 vCR.OnOpenVideoFile();
 
                 //IS INTERACTIVE
-                if(row.isInteractive != null)
+                for (int ina = 0; ina < row.isInteractive.Count; ina++)
                 {
-                    _QuestionCount = (row.questions.Count + 1) - row.questions.Count;
-                    GetButtton();
+                    if (row.isInteractive[ina] == "isinteractive")
+                    {
+                        b_IsInteractive = true;
+
+                        _QuestionCount = (row.questions.Count + 1) - row.questions.Count;
+                        GetButtton();
+                    }
                 }
+                
             }
         }
     }
@@ -88,7 +96,7 @@ public class InteractiveVideo : MonoBehaviour
     {
         foreach (var row in _datas)
         {
-            if (row.id == 1)
+            if (row.isInteractive != null)
             {
                 for ( int i = 0; i < row.questions.Count; i++)
                 {
@@ -122,7 +130,8 @@ public class InteractiveVideo : MonoBehaviour
 
         foreach (var row in _datas)
         {
-            if (row.id == KovukList.Instance.ClickPosterID && row.isInteractive != null)
+
+            if (row.id == KovukList.Instance.ClickPosterID && b_IsInteractive)
             {    
                 if (!NewQuestion)
                 {
@@ -196,7 +205,7 @@ public class InteractiveVideo : MonoBehaviour
         }
 
         //Question State
-        if (QuestionWrongState >= 1 && !b_QuestionSWrongState)
+        if (QuestionWrongState >= 1 && !b_QuestionSWrongState && b_IsInteractive)
         {
             b_QuestionSWrongState = true;
             for (int but = 0; but < ButtonList.Count; but++)
@@ -208,7 +217,7 @@ public class InteractiveVideo : MonoBehaviour
             }
             QuestionWrongState += 1;
         }
-        if (QuestionWrongState >= 2)
+        if (QuestionWrongState >= 2 && b_IsInteractive)
         {
             b_QuestionFWrongState = false;
 
@@ -227,7 +236,7 @@ public class InteractiveVideo : MonoBehaviour
                 }
             }
         }
-        if(QuestionWrongState >= 3 && !b_WrongQuestionOutTime)
+        if(QuestionWrongState >= 3 && !b_WrongQuestionOutTime && b_IsInteractive)
         {
             b_WrongQuestionOutTime = true;
 

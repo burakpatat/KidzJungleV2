@@ -6,30 +6,30 @@ using System.Collections.Generic;
 namespace _Environments._Mutual.Data.State
 {
     [Serializable]
-    public class IVData
+    public class Video_Data
     {
         public int id;
         public string videofile;
         public string videoname;
         public List<string> isInteractive;
         public string videoThumbnail;
-        public List<Category> category;
-        public List<Question> questions;
+        public List<Video_Category> category;
+        public List<IVideo_Question> questions;
     }
     [Serializable]
-    public class CategoriesId
+    public class Video_CategoriesId
     {
         public List<string> base_categories;
         public List<string> sub_categories;
         public string category_title;
     }
     [Serializable]
-    public class Category
+    public class Video_Category
     {
-        public CategoriesId Categories_id;
+        public Video_CategoriesId Categories_id;
     }
     [Serializable]
-    public class Pos
+    public class IVideo_Pos
     {
         public int id;
         public string caseName;
@@ -40,7 +40,7 @@ namespace _Environments._Mutual.Data.State
         public int vid;
     }
     [Serializable]
-    public class Question
+    public class IVideo_Question
     {
         public int id;
         public string name;
@@ -51,12 +51,12 @@ namespace _Environments._Mutual.Data.State
         public string secondwrongtime;
         public string truetime;
         public int qid;
-        public List<Pos> pos;
+        public List<IVideo_Pos> pos;
     }
     [Serializable]
-    public class InteractiveVideoClass
+    public class VideoClass
     {
-        public List<IVData> data;
+        public List<Video_Data> data;
         public override string ToString()
         {
             return UnityEngine.JsonUtility.ToJson(this, true);

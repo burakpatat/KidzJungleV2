@@ -1810,7 +1810,7 @@ MonoBehaviour:
   VideoPauseButton: {fileID: 1597747435}
   ButtonList: []
   NewQuestion: 0
-  currCountdownValue: 20
+  currCountdownValue: 10
   QuestionRowCount: 0
   QuestionWrongState: 0
   b_QuestionFWrongState: 0

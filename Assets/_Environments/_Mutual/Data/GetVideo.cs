@@ -8,12 +8,12 @@ using _Environments._Mutual.Data.State;
 
 namespace _Environments._Mutual.Data
 {
-    public class GetInteractiveVideo : AbstractGetData
+    public class GetVideo : AbstractGetData
     {
         public static int _CloumnCount = 0;
         public static int _PositionCloumnCount = 0;
-        public static InteractiveVideoClass InteractiveVideoClass;
-        public static IEnumerator GetIVDatas()
+        public static VideoClass VideoClass;
+        public static IEnumerator GetVideoDatas()
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/items/InteractiveVideo?fields=*,questions.*,questions.pos.*,category.Categories_id.*");
             yield return GetResultResponse(GetTarget.BASE, new string[1], mainUrl);
@@ -21,10 +21,10 @@ namespace _Environments._Mutual.Data
 
             try
             {
-                InteractiveVideoClass _datas = new InteractiveVideoClass();
-                _datas = JsonUtility.FromJson<InteractiveVideoClass>(_GETResponseResult);
+                VideoClass _datas = new VideoClass();
+                _datas = JsonUtility.FromJson<VideoClass>(_GETResponseResult);
                 _CloumnCount = _datas.data.Count;
-                InteractiveVideoClass = _datas;
+                VideoClass = _datas;
             }
             catch (System.Exception ex)
             {
