@@ -62,10 +62,36 @@ namespace _Environments._Mutual.Data.State
     public class UserClass
     {
         public List<User_Data> data;
+        public override string ToString()
+        {
+            return UnityEngine.JsonUtility.ToJson(this, true);
+        }
     }
     [Serializable]
     public class User_Video
     {
         public User_InteractiveVideoId InteractiveVideo_id;
+    }
+    [Serializable]
+    public class User_Login
+    {
+        public string email;
+        public string password;
+    }
+    [Serializable]
+    public class User_TokenData
+    {
+        public string access_token;
+        public int expires;
+        public string refresh_token;
+    }
+    [Serializable]
+    public class UserTokenClass
+    {
+        public User_TokenData data;
+        public override string ToString()
+        {
+            return UnityEngine.JsonUtility.ToJson(this, true);
+        }
     }
 }

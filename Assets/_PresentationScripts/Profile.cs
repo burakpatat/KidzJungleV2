@@ -30,6 +30,11 @@ public class Profile : MonoBehaviour
 
     public bool guestProfileRegister;
     public string guestUUID;
+
+    public Transform FirstPanel;
+    public Transform RegisterPanel;
+
+    bool entry = false;
     private void Awake()
     {
         Singleton();
@@ -39,19 +44,40 @@ public class Profile : MonoBehaviour
         Screen.orientation = ScreenOrientation.Portrait;
 
         GuestProfileSave.LoadFile();
-
-        if (GuestProfileSave.FILEFOUND)
+    }
+    private void Update()
+    {
+        if (GuestProfileSave.FILEFOUND == true && entry == false)
         {
-            guestProfileRegister = false;
+            entry = true;
             guestUUID = GuestProfileSave.GUESTUUID;
+
+            //Guest Login
+            StartCoroutine(Login.GuestUserLogin());
+
+        }
+        if (ConnectionManager.Instance.GuestLoginTokenCreated == true)
+        {
             SceneManager.LoadScene(1);
         }
     }
+    //splash
     public void ContinueButton()
     {
         GuestProfileSave.SaveFile();
 
         guestProfileRegister = false;
         SceneManager.LoadScene(1);
+    }
+    //splash
+    public void RegisterButton()
+    {
+        FirstPanel.gameObject.SetActive(false);
+        RegisterPanel.gameObject.SetActive(true);
+    }
+    public void BackButton()
+    {
+        RegisterPanel.gameObject.SetActive(false);
+        FirstPanel.gameObject.SetActive(true);
     }
 }

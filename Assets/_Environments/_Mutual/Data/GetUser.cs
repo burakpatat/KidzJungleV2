@@ -11,6 +11,9 @@ namespace _Environments._Mutual.Data
     public class GetUser : AbstractGetData
     {
         public static UserClass UserClass;
+        public static UserTokenClass UserTokenClass;
+        public static bool LoginOK = false;
+        
         public static IEnumerator GetUserDatas()
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/users?fields=*,profile.*,*,profile.Child.*," +
@@ -30,13 +33,23 @@ namespace _Environments._Mutual.Data
                 Debug.Log("exception:" + ex.Message + ex.InnerException?.Message);
             }
         }
-        /*public static IEnumerator PostProfileDatas(Post_Profile_Game _datas)
+        public static IEnumerator Login(User_Login _datas)
         {
-            string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/items/Content_Limitation_Games?fields=*,Games_id.*");
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/auth/login");
             yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
             yield return new WaitUntil(() => _POSTResponseResult != "");
 
+            if (_POSTResponseResult != null)
+            {
+                LoginOK = true;
+                Debug.Log("LoginOK!");
+                UserTokenClass _Tdatas = new UserTokenClass();
+                _Tdatas = JsonUtility.FromJson<UserTokenClass>(_POSTResponseResult);
+                UserTokenClass = _Tdatas;
+            }
+            
         }
+        /*
         public static IEnumerator DeleteProfileDatas(Delete_Profile_Game _datas, string DeleteID)
         {
             Debug.Log(Newtonsoft.Json.JsonConvert.SerializeObject(_datas));

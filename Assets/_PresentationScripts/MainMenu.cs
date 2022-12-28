@@ -41,6 +41,7 @@ public class MainMenu : MonoBehaviour
         ScoreText.text = "star : " + starcount.ToString() + "\n" + "diamond : " + diacount.ToString();
 
         Invoke("guestQuery", 1f);
+        //guestQuery();
     }
     void guestQuery()
     {

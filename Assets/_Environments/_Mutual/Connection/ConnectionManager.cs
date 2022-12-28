@@ -33,6 +33,9 @@ namespace _Environments._Mutual.Connection
         private string _BaseUrl = "";
 
         [SerializeField]
+        private string _GetToken;
+
+        [SerializeField]
         private string _ActiveToken;
 
         [Header("Auth Info")]
@@ -55,43 +58,22 @@ namespace _Environments._Mutual.Connection
         public string AuthName { get => _AuthName; set => _AuthName = value; }
         public string ParentName { get => _ParentName; set => _ParentName = value; }
         public List<string> ChildsName { get => _ChildsName; set => _ChildsName = value; }
-        public void setTokenAndBaseUrl()
+
+        public bool GuestLoginTokenCreated = false;
+
+        public bool GeneralUserLogin = false;
+        public void setBaseUrl()
         {
             String mainUrl = String.Empty;
-            String token = String.Empty;
 #if TEST
             mainUrl = "https://kidzjungle.directus.app";
-            token = "CrxfNKnyvKrYkFTo1vrYIZMcL81VCnAI";
 #elif PROD
             mainUrl = "https://api.kidzjungle.com/kidsvid";
-            token = "01fcd8d0-ae90-4740-9928-59051e9ec067";
-            premiumStatus = "0";
-            language = "tr-TR";
 #endif
 #if UNITY_EDITOR
-            Debug.Log("EDITOR VERSION STARTED");
-            Debug.Log("Caching size : " + Caching.cacheCount + " - " + Caching.ready);
-            AssetBundle.UnloadAllAssetBundles(false);
-            bool cleared = Caching.ClearCache();
-            Debug.Log("Cache cleared : " + cleared);
             BaseUrl = mainUrl;
-            ActiveToken = token;
 #elif UNITY_ANDROID
-            Debug.Log("Android PLATFORM VERSION STARTED");
-            Debug.Log("Caching size : " + Caching.cacheCount + " - " + Caching.ready);
-            AssetBundle.UnloadAllAssetBundles(false);
-            bool cleared = Caching.ClearCache();
-            Debug.Log("Cache cleared : " + cleared);
             BaseUrl = mainUrl;
-            ActiveToken = token;
-
-#elif STANDALONE
-            Debug.Log("STANDALONE VERSION STARTED");
-            Debug.Log("Caching size : "+Caching.cacheCount+" - "+Caching.ready);
-            AssetBundle.UnloadAllAssetBundles(false);
-            bool cleared = Caching.ClearCache();
-            Debug.Log("Cache cleared : "+cleared);
-            SetConnectionStats(mainUrl + token + premiumStatus + language);
 #endif
         }
         private void Awake()
@@ -102,13 +84,14 @@ namespace _Environments._Mutual.Connection
         }
         IEnumerator WebServices()
         {
-            setTokenAndBaseUrl();
+            setBaseUrl();
 
             yield return authInfo();
-
-            yield return GetGame.GetGameDatas();
-            yield return GetVideo.GetVideoDatas();
-            
+            //OTHER DMO
+            if (GeneralUserLogin)
+            {
+                yield return DMO();
+            }
 
             Debug.Log("Base Loaded");
         }
@@ -119,31 +102,51 @@ namespace _Environments._Mutual.Connection
 
         IEnumerator authInfo()
         {
-            yield return GetUser.GetUserDatas();
-            _userdatas = GetUser.UserClass.data;
-
-            foreach (var row in _userdatas)
+            if (Login.TOKENCreated)
             {
-                if (Profile.Instance.guestProfileRegister == false)
-                {
-                    for (int i = 0; i < row.profile.Count; i++)
-                    {
-                        if (row.profile[i].name == "Guest")
-                        {
-                            AuthID_KJ = row.profile[i].KJId;
-                            AuthName = row.profile[i].name;
-                            ParentName = row.profile[i].name;
+                ActiveToken = Login.LoginToken;
 
-                            for (int a = 0; a < row.profile[i].Child.Count; a++)
+                yield return new WaitForSeconds(.1f);
+
+                yield return GetUser.GetUserDatas();
+                _userdatas = GetUser.UserClass.data;
+                if (_userdatas != null)
+                {
+                    GeneralUserLogin = true;
+                }
+            }
+
+            if (GeneralUserLogin)
+            {
+                foreach (var row in _userdatas)
+                {
+                    if (Profile.Instance.guestProfileRegister == false)
+                    {
+                        for (int i = 0; i < row.profile.Count; i++)
+                        {
+                            if (row.profile[i].name == "Guest")
                             {
-                                ChildsName.Add(row.profile[i].Child[a].childname);
+                                AuthID_KJ = row.profile[i].KJId;
+                                AuthName = row.profile[i].name;
+                                ParentName = row.profile[i].name;
+
+                                for (int a = 0; a < row.profile[i].Child.Count; a++)
+                                {
+                                    ChildsName.Add(row.profile[i].Child[a].childname);
+                                }
                             }
                         }
                     }
                 }
             }
-
+        }
+        IEnumerator DMO()
+        {
+            yield return new WaitForSeconds(.2f);
+            yield return GetGame.GetGameDatas();
+            yield return GetVideo.GetVideoDatas();
             yield return GetProfile.GetProfileDatas();
+
             _profiledatas = GetProfile.ProfileClass.data;
         }
     }

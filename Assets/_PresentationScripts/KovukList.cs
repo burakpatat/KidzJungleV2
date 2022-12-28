@@ -46,13 +46,12 @@ public class KovukList : MonoBehaviour
     public int ClickPosterID;
     void Start()
     {
-        Invoke("InitData", 1.2f);
+        Invoke("InitData", 1.4f);
     }
 
     void InitData()
     {
         _datas = GetVideo.VideoClass.data;
-
         GetList();
     }
     void GetList()
