@@ -11,16 +11,11 @@ namespace _Environments._Mutual.Connection
 {
     public class Login : MonoBehaviour
     {
-        public static string LoginToken;
+        public static string LoginToken ="";
 
         public static bool TOKENCreated = false;
 
         public static bool FirstOpen = false;
-        private void Awake()
-        {
-            TOKENCreated = false;
-            FirstOpen = false;
-        }
         public static IEnumerator GuestUserLogin()
         {
             User_Login _datas = new User_Login();

@@ -249,6 +249,7 @@ MonoBehaviour:
   - {fileID: 997790761}
   UserNameText: {fileID: 0}
   Posters: {fileID: 1536226932}
+  ClickPosterID: 0
 --- !u!1 &997790760
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Kavuk
+  m_text: Kovuk
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 07160cb97b4e6b647bb3e06f0bc85c8b, type: 2}
   m_sharedMaterial: {fileID: 7362557965553815602, guid: 07160cb97b4e6b647bb3e06f0bc85c8b, type: 2}
@@ -827,14 +828,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BaseUrl: 
+  _GetToken: 
   _ActiveToken: 
-  _PremiumStatus: 0
-  _Language: 
   _AuthID: 
   _AuthName: 
   _ParentName: 
   _ChildsName: []
+  _userdatas: []
   _profiledatas: []
+  GuestLoginTokenCreated: 0
+  GeneralUserLogin: 0
 --- !u!4 &1896302163
 Transform:
   m_ObjectHideFlags: 0

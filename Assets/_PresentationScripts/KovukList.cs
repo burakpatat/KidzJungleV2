@@ -46,7 +46,7 @@ public class KovukList : MonoBehaviour
     public int ClickPosterID;
     void Start()
     {
-        Invoke("InitData", 1.4f);
+        Invoke("InitData", 3f);
     }
 
     void InitData()
