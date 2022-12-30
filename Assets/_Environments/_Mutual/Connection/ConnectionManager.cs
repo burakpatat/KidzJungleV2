@@ -7,6 +7,7 @@ using System.Linq;
 using _Environments._Mutual;
 using _Environments._Mutual.Data;
 using _Environments._Mutual.Data.State;
+using _Environments._Local;
 
 namespace _Environments._Mutual.Connection
 {
@@ -79,8 +80,6 @@ namespace _Environments._Mutual.Connection
         private void Awake()
         {
             Singleton();
-
-            StartCoroutine(WebServices());
         }
         IEnumerator WebServices()
         {
@@ -94,6 +93,13 @@ namespace _Environments._Mutual.Connection
             }
 
             Debug.Log("Base Loaded");
+        }
+        private void Start()
+        {
+            if (GuestProfileSave.FILEFOUND)
+            {
+                StartCoroutine(WebServices());
+            }
         }
         private void LogMessage(string message)
         {

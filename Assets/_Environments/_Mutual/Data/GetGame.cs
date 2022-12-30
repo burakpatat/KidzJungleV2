@@ -22,6 +22,7 @@ namespace _Environments._Mutual.Data
             {
                 GameClass _datas = new GameClass();
                 _datas = JsonUtility.FromJson<GameClass>(_GETResponseResult);
+                _CloumnCount = _datas.data.Count;
                 GameClass = _datas;
             }
             catch (System.Exception ex)

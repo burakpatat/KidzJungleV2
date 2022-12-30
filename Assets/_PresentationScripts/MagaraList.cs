@@ -45,6 +45,9 @@ public class MagaraList : MonoBehaviour
 
     List<GData> _datas = new List<GData>();
     public int ClickPosterID;
+
+    public TMP_Text userName;
+    public Image BundleProgressbar;
     void Start()
     {
         Invoke("InitData", 3f);
@@ -54,6 +57,8 @@ public class MagaraList : MonoBehaviour
     {
         _datas = GetGame.GameClass.data;
         GetList();
+
+        userName.text = ConnectionManager.Instance.ChildsName[0];
     }
     void GetList()
     {
@@ -98,8 +103,37 @@ public class MagaraList : MonoBehaviour
     }
     public void GETClick(int id)
     {
-        ClickPosterID = id;
-        SceneManager.LoadScene(5);
+        foreach (var row in _datas)
+        {
+            if (row.id == id)
+            {
+                foreach (var prow in ConnectionManager.Instance._profiledatas)
+                {
+                    for (int i = 0; i < prow.Child.Count; i++)
+                    {
+                        if (prow.Child[i].childname == ConnectionManager.Instance.ChildsName[0])
+                        {
+                            if (prow.Child[i].content_limitation[0].Games != null)
+                            {
+                                for (int a = 0; a < prow.Child[i].content_limitation[0].Games.Count; a++)
+                                {
+                                    if (prow.Child[i].content_limitation[0].Games[a].Games_id.name.Contains(row.name))
+                                    {
+                                        StartCoroutine(MtekAssetBundle.DownloadAssetBundle(GetGame.GetMedia() + row.MainBundle[0].files[0].directus_files_id, row.name, OnGameLoadProgress, row.MainBundle[0].scenename));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void OnGameLoadProgress(int progress)
+    {
+        Debug.Log("MtekGames " + progress);
+
+        BundleProgressbar.fillAmount = progress / 100.0f;
     }
     public IEnumerator SetPoster(string url, string name, Transform _intanceObj)
     {

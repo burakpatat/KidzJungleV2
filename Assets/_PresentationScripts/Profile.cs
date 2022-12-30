@@ -38,9 +38,7 @@ public class Profile : MonoBehaviour
     private void Awake()
     {
         Singleton();
-    }
-    private void Start()
-    {
+
         Screen.orientation = ScreenOrientation.Portrait;
 
         GuestProfileSave.LoadFile();
