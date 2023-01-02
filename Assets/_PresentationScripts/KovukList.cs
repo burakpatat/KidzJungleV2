@@ -10,6 +10,7 @@ using _Environments._Mutual.Data.State;
 using _Environments._Mutual.Connection;
 using UnityEngine.Networking;
 using System.IO;
+using System.Threading.Tasks;
 
 public class KovukList : MonoBehaviour
 {
@@ -44,14 +45,16 @@ public class KovukList : MonoBehaviour
     List<Video_Data> _datas = new List<Video_Data>();
 
     public int ClickPosterID;
-    void Start()
-    {
-        Invoke("InitData", 3f);
-    }
 
-    void InitData()
+    async void Start()
+    {
+        Task task = InitData();
+        await task;
+    }
+    async Task InitData()
     {
         _datas = GetVideo.VideoClass.data;
+        await Task.Delay(900);
         GetList();
     }
     void GetList()
@@ -68,6 +71,7 @@ public class KovukList : MonoBehaviour
             StartCoroutine(SetPoster(GetVideo.GetMedia() + _datas[i].videoThumbnail, _datas[i].videoname, _intanceObj.transform.GetChild(0)));
             _intanceObj.transform.GetChild(1).gameObject.SetActive(true);
 
+           
             foreach (var prow in ConnectionManager.Instance._profiledatas)
             {
                 for (int p = 0; p < prow.Child.Count; p++)

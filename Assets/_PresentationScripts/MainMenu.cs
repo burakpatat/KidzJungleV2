@@ -75,10 +75,30 @@ public class MainMenu : MonoBehaviour
     }
     public void WatchButton()
     {
-        SceneManager.LoadScene(2);
+        StartCoroutine(Load(2));
     }
     public void PlayButton()
     {
         SceneManager.LoadScene(3);
+    }
+    IEnumerator Load(int index)
+    {
+        Application.backgroundLoadingPriority = ThreadPriority.BelowNormal;
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index, LoadSceneMode.Single);
+        asyncOperation.allowSceneActivation = false;
+        while (!asyncOperation.isDone)
+        {
+            int p = (int)(asyncOperation.progress * 100f);
+            Debug.Log(p.ToString() + "%");
+            
+            if(p >= 89)
+            {
+                p = 100;
+                asyncOperation.allowSceneActivation = true;
+            }
+
+            yield return null;
+        }
+        
     }
 }

@@ -1554,14 +1554,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BaseUrl: 
+  _GetToken: 
   _ActiveToken: 
-  _PremiumStatus: 0
-  _Language: 
   _AuthID: 
   _AuthName: 
   _ParentName: 
   _ChildsName: []
+  _userdatas: []
   _profiledatas: []
+  GuestLoginTokenCreated: 0
+  GeneralUserLogin: 0
 --- !u!4 &1080816520
 Transform:
   m_ObjectHideFlags: 0

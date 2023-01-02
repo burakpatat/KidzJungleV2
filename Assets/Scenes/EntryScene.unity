@@ -3698,6 +3698,7 @@ MonoBehaviour:
   _ChildsName: []
   _userdatas: []
   _profiledatas: []
+  GuestLoginTokenCreated: 0
   GeneralUserLogin: 0
 --- !u!4 &1982454343
 Transform:

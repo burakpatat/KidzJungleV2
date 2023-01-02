@@ -80,6 +80,11 @@ namespace _Environments._Mutual.Connection
         private void Awake()
         {
             Singleton();
+
+            if (GuestProfileSave.FILEFOUND)
+            {
+                StartCoroutine(WebServices());
+            }
         }
         IEnumerator WebServices()
         {
@@ -93,13 +98,6 @@ namespace _Environments._Mutual.Connection
             }
 
             Debug.Log("Base Loaded");
-        }
-        private void Start()
-        {
-            if (GuestProfileSave.FILEFOUND)
-            {
-                StartCoroutine(WebServices());
-            }
         }
         private void LogMessage(string message)
         {
@@ -148,7 +146,6 @@ namespace _Environments._Mutual.Connection
         }
         IEnumerator DMO()
         {
-            yield return new WaitForSeconds(.2f);
             yield return GetGame.GetGameDatas();
             yield return GetVideo.GetVideoDatas();
             yield return GetProfile.GetProfileDatas();
