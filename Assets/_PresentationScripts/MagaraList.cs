@@ -48,16 +48,16 @@ public class MagaraList : MonoBehaviour
 
     public TMP_Text userName;
     public Image BundleProgressbar;
-    void Start()
+    async void Start()
     {
-        Invoke("InitData", 3f);
+        Task task = InitData();
+        await task;
     }
-
-    void InitData()
+    async Task InitData()
     {
         _datas = GetGame.GameClass.data;
+        await Task.Delay(900);
         GetList();
-
         userName.text = ConnectionManager.Instance.ChildsName[0];
     }
     void GetList()
