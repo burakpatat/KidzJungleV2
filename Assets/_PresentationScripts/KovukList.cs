@@ -33,7 +33,6 @@ public class KovukList : MonoBehaviour
     private void Awake()
     {
         Singleton();
-
         _cachePath = Application.persistentDataPath + "/Posters";
     }
     public GameObject PosterButton;
@@ -46,20 +45,18 @@ public class KovukList : MonoBehaviour
 
     public int ClickPosterID;
 
-    private void Update()
+    void Update()
     {
         InitData();
     }
     void InitData()
     {
-
         if (ConnectionManager.Instance.BaseLoadedOK)
         {
             ConnectionManager.Instance.BaseLoadedOK = false;
             _datas = GetVideo.VideoClass.data;
             GetList();
         }
-       
     }
     void GetList()
     {

@@ -35,7 +35,7 @@ public class MagaraList : MonoBehaviour
     private void Awake()
     {
         Singleton();
-        _cachePath = Application.persistentDataPath + "/Temp/Covers";
+        _cachePath = Application.persistentDataPath + "/Posters";
     }
 
     public GameObject PosterButton;
@@ -48,17 +48,19 @@ public class MagaraList : MonoBehaviour
 
     public TMP_Text userName;
     public Image BundleProgressbar;
-    async void Start()
+    void Update()
     {
-        Task task = InitData();
-        await task;
+        InitData();
     }
-    async Task InitData()
+    void InitData()
     {
-        _datas = GetGame.GameClass.data;
-        await Task.Delay(900);
-        GetList();
-        userName.text = ConnectionManager.Instance.ChildsName[0];
+        if (ConnectionManager.Instance.BaseLoadedOK)
+        {
+            ConnectionManager.Instance.BaseLoadedOK = false;
+            _datas = GetGame.GameClass.data;
+            GetList();
+            userName.text = ConnectionManager.Instance.ChildsName[0];
+        }
     }
     void GetList()
     {
@@ -143,9 +145,9 @@ public class MagaraList : MonoBehaviour
             Directory.CreateDirectory(_cachePath);
         }
 
-        string posterPath = _cachePath + "/" + name + ".poster";
+        string posterPath = _cachePath + "/" + DataTypeExtensions.RemoveDigits(name).ToLower() + ".poster";
         bool valid = true;
-        _texture = new Texture2D(1080, 1920);
+        Texture2D _texture = new Texture2D(1080, 1920);
 
         if (System.IO.File.Exists(posterPath))
         {
@@ -183,12 +185,8 @@ public class MagaraList : MonoBehaviour
 
             Rect rec = new Rect(0, 0, _texture.width, _texture.height);
             _intanceObj.transform.GetComponent<Image>().sprite = Sprite.Create(_texture, rec, new Vector2(0, 0), 1);
-
         }
-
 
         yield return null;
     }
-    void OnDestroy() => Dispose();
-    public void Dispose() => UnityEngine.Object.Destroy(_texture);
 }
