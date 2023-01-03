@@ -6,6 +6,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 
@@ -554,5 +555,37 @@ public static class DataTypeExtensions
     public static string ToFormat(this string value, params string[] parameters)
     {
         return string.Format(value, parameters);
+    }
+    public static string RemoveDigits(string text)
+    {
+        if (string.IsNullOrEmpty(text)) return text;
+
+        text = Regex.Replace(text, @" ", "");
+
+        Dictionary<char, char> TurkishChToEnglishChDic = new Dictionary<char, char>()
+        {
+            {'ç','c'},
+            {'Ç','C'},
+            {'ğ','g'},
+            {'Ğ','G'},
+            {'ı','i'},
+            {'İ','I'},
+            {'ş','s'},
+            {'Ş','S'},
+            {'ö','o'},
+            {'Ö','O'},
+            {'ü','u'},
+            {'Ü','U'}
+        };
+
+        return text.Aggregate(new StringBuilder(), (sb, chr) =>
+        {
+            if (TurkishChToEnglishChDic.ContainsKey(chr))
+                sb.Append(TurkishChToEnglishChDic[chr]);
+            else
+                sb.Append(chr);
+
+            return sb;
+        }).ToString();
     }
 }

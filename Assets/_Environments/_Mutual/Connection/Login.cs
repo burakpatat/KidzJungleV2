@@ -33,5 +33,11 @@ namespace _Environments._Mutual.Connection
             TOKENCreated = true;
 
         }
+
+        private void OnApplicationQuit()
+        {
+            LoginToken = "";
+            TOKENCreated = false;
+        }
     }
 }

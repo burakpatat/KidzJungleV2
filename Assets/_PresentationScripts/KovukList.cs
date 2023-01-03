@@ -33,11 +33,11 @@ public class KovukList : MonoBehaviour
     private void Awake()
     {
         Singleton();
-        _cachePath = Application.persistentDataPath + "/Temp/Covers";
+
+        _cachePath = Application.persistentDataPath + "/Posters";
     }
     public GameObject PosterButton;
     public List<Transform> PosterTransform;
-    Texture2D _texture;
 
     public TMP_Text UserNameText;
     public Transform Posters;
@@ -115,10 +115,10 @@ public class KovukList : MonoBehaviour
             Debug.Log("No directory found for temporary files. Creating one.");
             Directory.CreateDirectory(_cachePath);
         }
-
-        string posterPath = _cachePath + "/" + name + ".poster";
+        
+        string posterPath = _cachePath + "/" + DataTypeExtensions.RemoveDigits(name).ToLower() + ".poster";
         bool valid = true;
-        _texture = new Texture2D(1080, 1920);
+        Texture2D _texture = new Texture2D(1080, 1920);
 
         if (System.IO.File.Exists(posterPath))
         {
@@ -156,12 +156,8 @@ public class KovukList : MonoBehaviour
 
             Rect rec = new Rect(0, 0, _texture.width, _texture.height);
             _intanceObj.transform.GetComponent<Image>().sprite = Sprite.Create(_texture, rec, new Vector2(0, 0), 1);
-
         }
-
 
         yield return null;
     }
-    void OnDestroy() => Dispose();
-    public void Dispose() => UnityEngine.Object.Destroy(_texture);
 }
