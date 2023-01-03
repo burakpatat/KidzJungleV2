@@ -46,16 +46,20 @@ public class KovukList : MonoBehaviour
 
     public int ClickPosterID;
 
-    async void Start()
+    private void Update()
     {
-        Task task = InitData();
-        await task;
+        InitData();
     }
-    async Task InitData()
+    void InitData()
     {
-        _datas = GetVideo.VideoClass.data;
-        await Task.Delay(900);
-        GetList();
+
+        if (ConnectionManager.Instance.BaseLoadedOK)
+        {
+            ConnectionManager.Instance.BaseLoadedOK = false;
+            _datas = GetVideo.VideoClass.data;
+            GetList();
+        }
+       
     }
     void GetList()
     {

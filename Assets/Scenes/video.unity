@@ -216,7 +216,7 @@ MonoBehaviour:
     keyServerAuthToken: 
     base64EncodedKeyBlob: 
   _optionsIOS:
-    overridePath: 0
+    overridePath: 1
     pathLocation: 2
     path: 
     audioMode: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
     useYpCbCr420Textures: 1
     resumePlaybackOnAudioSessionRouteChange: 0
   _optionsAndroid:
-    overridePath: 0
+    overridePath: 1
     pathLocation: 0
     path: 
     videoApi: 2
@@ -1432,7 +1432,7 @@ MonoBehaviour:
     showPosterFrame: 0
     enableAudio360: 0
     audio360ChannelMode: 0
-    preferSoftwareDecoder: 0
+    preferSoftwareDecoder: 1
     httpHeaders: []
     httpHeaderJson: 
     fileOffset: 0
@@ -3238,14 +3238,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BaseUrl: 
+  _GetToken: 
   _ActiveToken: 
-  _PremiumStatus: 0
-  _Language: 
   _AuthID: 
   _AuthName: 
   _ParentName: 
   _ChildsName: []
+  _userdatas: []
   _profiledatas: []
+  BaseLoadedOK: 0
+  GuestLoginTokenCreated: 0
+  GeneralUserLogin: 0
 --- !u!4 &1785896002
 Transform:
   m_ObjectHideFlags: 0

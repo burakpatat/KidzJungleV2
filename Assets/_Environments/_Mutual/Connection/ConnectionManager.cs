@@ -60,6 +60,8 @@ namespace _Environments._Mutual.Connection
         public string ParentName { get => _ParentName; set => _ParentName = value; }
         public List<string> ChildsName { get => _ChildsName; set => _ChildsName = value; }
 
+        public bool BaseLoadedOK = false;
+
         public bool GuestLoginTokenCreated = false;
 
         public bool GeneralUserLogin = false;
@@ -73,7 +75,17 @@ namespace _Environments._Mutual.Connection
 #endif
 #if UNITY_EDITOR
             BaseUrl = mainUrl;
+            Debug.Log("EDITOR VERSION STARTED");
+            Debug.Log("Caching size : " + Caching.cacheCount + " - " + Caching.ready);
+            AssetBundle.UnloadAllAssetBundles(false);
+            bool cleared = Caching.ClearCache();
+            Debug.Log("Cache cleared : " + cleared);
 #elif UNITY_ANDROID
+            Debug.Log("Android PLATFORM VERSION STARTED");
+            Debug.Log("Caching size : " + Caching.cacheCount + " - " + Caching.ready);
+            AssetBundle.UnloadAllAssetBundles(false);
+            bool cleared = Caching.ClearCache();
+            Debug.Log("Cache cleared : " + cleared);
             BaseUrl = mainUrl;
 #endif
         }
@@ -90,27 +102,23 @@ namespace _Environments._Mutual.Connection
         {
             setBaseUrl();
 
-            yield return authInfo();
+            yield return auth();
             //OTHER DMO
             if (GeneralUserLogin)
             {
                 yield return DMO();
             }
 
+            BaseLoadedOK = true;
             Debug.Log("Base Loaded");
         }
-        private void LogMessage(string message)
-        {
-            Debug.Log(message + "\n");
-        }
-
-        IEnumerator authInfo()
+        IEnumerator auth()
         {
             if (Login.TOKENCreated)
             {
                 ActiveToken = Login.LoginToken;
 
-                yield return new WaitForSeconds(.1f);
+                yield return new WaitForSeconds(.2f);
 
                 yield return GetUser.GetUserDatas();
                 _userdatas = GetUser.UserClass.data;
@@ -118,26 +126,30 @@ namespace _Environments._Mutual.Connection
                 {
                     GeneralUserLogin = true;
                 }
-            }
 
-            if (GeneralUserLogin)
-            {
-                foreach (var row in _userdatas)
+                if (GeneralUserLogin)
                 {
-                    if (Profile.Instance.guestProfileRegister == false)
+                    authInfo();
+                }
+            }
+        }
+        void authInfo()
+        {
+            foreach (var row in _userdatas)
+            {
+                if (Profile.Instance.guestProfileRegister == false)
+                {
+                    for (int i = 0; i < row.profile.Count; i++)
                     {
-                        for (int i = 0; i < row.profile.Count; i++)
+                        if (row.profile[i].name == "Guest")
                         {
-                            if (row.profile[i].name == "Guest")
-                            {
-                                AuthID_KJ = row.profile[i].KJId;
-                                AuthName = row.profile[i].name;
-                                ParentName = row.profile[i].name;
+                            AuthID_KJ = row.profile[i].KJId;
+                            AuthName = row.profile[i].name;
+                            ParentName = row.profile[i].name;
 
-                                for (int a = 0; a < row.profile[i].Child.Count; a++)
-                                {
-                                    ChildsName.Add(row.profile[i].Child[a].childname);
-                                }
+                            for (int a = 0; a < row.profile[i].Child.Count; a++)
+                            {
+                                ChildsName.Add(row.profile[i].Child[a].childname);
                             }
                         }
                     }

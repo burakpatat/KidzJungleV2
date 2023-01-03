@@ -39,14 +39,13 @@ public class MainMenu : MonoBehaviour
         starcount = PlayerPrefs.GetInt("starVal");
         diacount = PlayerPrefs.GetInt("diaVal");
         ScoreText.text = "star : " + starcount.ToString() + "\n" + "diamond : " + diacount.ToString();
-
-        Invoke("guestQuery", 1f);
-        //guestQuery();
     }
     void guestQuery()
     {
-        if (ConnectionManager.Instance.AuthName == "Guest")
+        if (ConnectionManager.Instance.BaseLoadedOK && ConnectionManager.Instance.AuthName == "Guest")
         {
+            ConnectionManager.Instance.BaseLoadedOK = false;
+
             UUIDText.text = Profile.Instance.guestUUID;
             usernameText.text = "childName : " + ConnectionManager.Instance.ChildsName[0] + "\n" + "parentName : " + ConnectionManager.Instance.AuthName;
         }
@@ -57,7 +56,7 @@ public class MainMenu : MonoBehaviour
     }
     void Update()
     {
-        
+        guestQuery();
     }
     public void StarButton()
     {
