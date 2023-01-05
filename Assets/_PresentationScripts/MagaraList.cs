@@ -40,7 +40,6 @@ public class MagaraList : MonoBehaviour
 
     public GameObject PosterButton;
     public List<Transform> PosterTransform;
-    Texture2D _texture;
     public Transform Posters;
 
     List<GData> _datas = new List<GData>();
