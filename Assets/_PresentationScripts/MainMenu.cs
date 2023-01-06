@@ -9,6 +9,8 @@ using _Environments._Mutual.Data;
 using _Environments._Mutual.Data.State;
 using System.Threading.Tasks;
 
+using DG.Tweening;
+
 public class MainMenu : MonoBehaviour
 {
     #region Singleton
@@ -32,6 +34,10 @@ public class MainMenu : MonoBehaviour
     int starcount, diacount;
 
     public TMP_Text ScoreText;
+
+    public LoadingScreenManager _loadingScreenManager;
+
+    public Transform fakeLoadImage;
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -39,6 +45,8 @@ public class MainMenu : MonoBehaviour
         starcount = PlayerPrefs.GetInt("starVal");
         diacount = PlayerPrefs.GetInt("diaVal");
         ScoreText.text = "star : " + starcount.ToString() + "\n" + "diamond : " + diacount.ToString();
+
+        fakeLoadImage.GetComponent<RectTransform>().DORotate(new Vector3(0, 0, 180), .6f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
     }
     void guestQuery()
     {
@@ -48,6 +56,10 @@ public class MainMenu : MonoBehaviour
 
             UUIDText.text = Profile.Instance.guestUUID;
             usernameText.text = "childName : " + ConnectionManager.Instance.ChildsName[0] + "\n" + "parentName : " + ConnectionManager.Instance.AuthName;
+
+            _loadingScreenManager.HideLoadingScreen();
+            fakeLoadImage.GetComponent<RectTransform>().DOScale(Vector3.zero, .6f).SetEase(Ease.Linear);
+
         }
     }
     private void Awake()

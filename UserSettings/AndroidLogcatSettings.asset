@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "0415384541343433",
+    "m_SelectedDeviceId": "R52M90E3H7H",
     "m_SelectedPackage": {
-        "deviceId": "0415384541343433",
+        "deviceId": "R52M90E3H7H",
         "name": "com.MTEKInformationSystems.KidzJungleV2",
-        "processId": 25719,
+        "processId": 16677,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -54,6 +54,12 @@
             "deviceId": "0415384541343433",
             "name": "com.MTEKInformationSystems.KidzJungleV2",
             "processId": 25719,
+            "exited": false
+        },
+        {
+            "deviceId": "R52M90E3H7H",
+            "name": "com.MTEKInformationSystems.KidzJungleV2",
+            "processId": 16677,
             "exited": false
         }
     ],

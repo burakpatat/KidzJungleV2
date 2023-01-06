@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using _Environments._Mutual.Data;
 using _Environments._Mutual.Data.State;
+using _Environments._Mutual.Connection;
 using UnityEngine.UI;
 using TMPro;
 
 using RenderHeads.Media.AVProVideo;
 using RenderHeads.Media.AVProVideo.Demos;
 
+using DG.Tweening;
 public enum QuestionTime
 {
     InTime,
@@ -60,37 +62,47 @@ public class Video : MonoBehaviour
     bool b_WrongQuestionOutTime = false;
 
     bool b_IsInteractive = false;
+
+    public LoadingScreenManager _loadingScreenManager;
+    public Transform fakeLoadImage;
+    bool LoadingOKForLodingPanel = false;
     void Start()
     {
-        Invoke("InitData", 1.2f);
+        fakeLoadImage.GetComponent<RectTransform>().DORotate(new Vector3(0, 0, 180), .6f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
         StartCoroutine(Fps());
     }
     void InitData()
     {
-        _datas = GetVideo.VideoClass.data;
-
-        foreach (var row in _datas)
+        if (ConnectionManager.Instance.BaseLoadedOK)
         {
-            if (row.id == KovukList.Instance.ClickPosterID)
+            ConnectionManager.Instance.BaseLoadedOK = false;
+
+            _datas = GetVideo.VideoClass.data;
+
+            foreach (var row in _datas)
             {
-                //openVideo
-                vCR._videoFiles.Add(GetVideo.GetMedia() + row.videofile);
-                vCR.OnOpenVideoFile();
-
-                //IS INTERACTIVE
-                for (int ina = 0; ina < row.isInteractive.Count; ina++)
+                if (row.id == KovukList.Instance.ClickPosterID)
                 {
-                    if (row.isInteractive[ina] == "isinteractive")
-                    {
-                        b_IsInteractive = true;
+                    //openVideo
+                    vCR._videoFiles.Add(GetVideo.GetMedia() + row.videofile);
+                    vCR.OnOpenVideoFile();
 
-                        _QuestionCount = (row.questions.Count + 1) - row.questions.Count;
-                        GetButtton();
+                    //IS INTERACTIVE
+                    for (int ina = 0; ina < row.isInteractive.Count; ina++)
+                    {
+                        if (row.isInteractive[ina] == "isinteractive")
+                        {
+                            b_IsInteractive = true;
+
+                            _QuestionCount = (row.questions.Count + 1) - row.questions.Count;
+                            GetButtton();
+                        }
                     }
+
                 }
-                
             }
         }
+        
     }
     void GetButtton()
     {
@@ -126,6 +138,20 @@ public class Video : MonoBehaviour
     }
     private void Update()
     {
+        InitData();
+
+        if (vCR.PlayingPlayer.Control.IsPlaying())
+        {
+            LoadingOKForLodingPanel = true;
+        }
+
+        if (LoadingOKForLodingPanel == true)
+        {
+            LoadingOKForLodingPanel = false;
+            _loadingScreenManager.HideLoadingScreen();
+            fakeLoadImage.GetComponent<RectTransform>().DOScale(Vector3.zero, .6f).SetEase(Ease.Linear);
+        }
+
         fpsText.text = "fps: " + Mathf.Round(fps).ToString() + "\n" + "vfr: " + vCR._mediaPlayerB.Info.GetVideoFrameRate();
 
         foreach (var row in _datas)
