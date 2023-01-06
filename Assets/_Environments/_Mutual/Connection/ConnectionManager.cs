@@ -93,10 +93,7 @@ namespace _Environments._Mutual.Connection
         {
             Singleton();
 
-            if (GuestProfileSave.FILEFOUND)
-            {
-                StartCoroutine(WebServices());
-            }
+            StartCoroutine(WebServices());
         }
         IEnumerator WebServices()
         {

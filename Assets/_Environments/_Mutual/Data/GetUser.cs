@@ -49,12 +49,17 @@ namespace _Environments._Mutual.Data
             }
             
         }
-        /*
-        public static IEnumerator DeleteProfileDatas(Delete_Profile_Game _datas, string DeleteID)
+        public static IEnumerator Register(User_Register _datas)
         {
-            Debug.Log(Newtonsoft.Json.JsonConvert.SerializeObject(_datas));
-            string mainUrl = ConnectionManager.Instance.BaseUrl + Delete_SubUrl(DeleteTarget.DELETEBASE, "/items/Content_Limitation_Games/" + DeleteID);
-            yield return DeleteData(mainUrl, DeleteTarget.DELETEBASE, _datas);
-        }*/
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/users");
+            yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
+            yield return new WaitUntil(() => _POSTResponseResult != "");
+
+            if (_POSTResponseResult != null)
+            {
+                Debug.Log("RegisterOK!");
+            }
+
+        }
     }
 }

@@ -54,6 +54,7 @@ public class Profile : MonoBehaviour
             StartCoroutine(Login.GuestUserLogin());
 
         }
+
         if (ConnectionManager.Instance.GuestLoginTokenCreated == true)
         {
             SceneManager.LoadScene(1);

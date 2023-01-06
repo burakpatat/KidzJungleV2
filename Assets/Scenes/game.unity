@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13255894, g: 0.21019208, b: 0.22601025, a: 1}
+  m_IndirectSpecularColor: {r: 0.1324116, g: 0.21007359, b: 0.22587661, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -651,14 +651,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BaseUrl: 
+  _GetToken: 
   _ActiveToken: 
-  _PremiumStatus: 0
-  _Language: 
   _AuthID: 
   _AuthName: 
   _ParentName: 
   _ChildsName: []
+  _userdatas: []
   _profiledatas: []
+  BaseLoadedOK: 0
+  GuestLoginTokenCreated: 0
+  GeneralUserLogin: 0
 --- !u!4 &603682635
 Transform:
   m_ObjectHideFlags: 0
@@ -1280,11 +1283,8 @@ MonoBehaviour:
   PassPanelText: {fileID: 2083423227}
   PassButton: {fileID: 370049818}
   PassCloseButton: {fileID: 867557950}
-  NotPassPanel: {fileID: 1226308983}
-  NotPassPanelText: {fileID: 923682780}
-  NotPassButton: {fileID: 1762423987}
-  NotPassCloseButton: {fileID: 1798557143}
-  _contentLimitationIDforhiddenGamesTable: 0
+  _ContentLimitationIDforhiddenGamesTable: 0
+  _GamesIDforhiddenGamesTable: 0
 --- !u!4 &1049337493
 Transform:
   m_ObjectHideFlags: 0

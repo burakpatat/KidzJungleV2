@@ -11,7 +11,6 @@ using _Environments._Mutual.Connection;
 using UnityEngine.Networking;
 using System.IO;
 using System.Threading.Tasks;
-using DG.Tweening;
 
 public class KovukList : MonoBehaviour
 {
@@ -47,14 +46,9 @@ public class KovukList : MonoBehaviour
     public int ClickPosterID;
 
     bool LoadingOKForLodingPanel = false;
-
-    public LoadingScreenManager _loadingScreenManager;
-
-    public Transform fakeLoadImage;
-
     private void Start()
     {
-        fakeLoadImage.GetComponent<RectTransform>().DORotate(new Vector3(0, 0, 180), .6f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
+        
     }
     void Update()
     {
@@ -63,8 +57,8 @@ public class KovukList : MonoBehaviour
         if(LoadingOKForLodingPanel == true)
         {
             LoadingOKForLodingPanel = false;
-            _loadingScreenManager.HideLoadingScreen();
-            fakeLoadImage.GetComponent<RectTransform>().DOScale(Vector3.zero, .6f).SetEase(Ease.Linear);
+
+            DataLoading.Instance.HideLoading();
         }
 
     }
@@ -122,7 +116,9 @@ public class KovukList : MonoBehaviour
     public void GETClick(int id)
     {
         ClickPosterID = id;
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
+
+        DataLoading.Instance.ReOp();
     }
     public IEnumerator SetPoster(string url, string name, Transform _intanceObj)
     {

@@ -75,6 +75,18 @@ namespace _Environments._Mutual.Data.State
     [Serializable]
     public class User_Login
     {
+        public string first_name;
+        public string email;
+        public string password;
+        public string role;
+        //avatar
+
+        //profil tarafında kjId ve name ile fn eşle profil post yap user da eşle 
+        
+    }
+    [Serializable]
+    public class User_Register
+    {
         public string email;
         public string password;
     }

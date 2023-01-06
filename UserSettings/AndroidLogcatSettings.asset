@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R52M90E3H7H",
         "name": "com.MTEKInformationSystems.KidzJungleV2",
-        "processId": 16677,
+        "processId": 23070,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -60,6 +60,12 @@
             "deviceId": "R52M90E3H7H",
             "name": "com.MTEKInformationSystems.KidzJungleV2",
             "processId": 16677,
+            "exited": true
+        },
+        {
+            "deviceId": "R52M90E3H7H",
+            "name": "com.MTEKInformationSystems.KidzJungleV2",
+            "processId": 23070,
             "exited": false
         }
     ],

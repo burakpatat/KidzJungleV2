@@ -35,9 +35,13 @@ public class MainMenu : MonoBehaviour
 
     public TMP_Text ScoreText;
 
-    public LoadingScreenManager _loadingScreenManager;
+    [Header("Register")]
+    public Transform RegisterTransform;
 
-    public Transform fakeLoadImage;
+    public TMP_InputField UsernameIF;
+    public TMP_InputField MailIF;
+    public TMP_InputField PasswordIF;
+
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -45,8 +49,6 @@ public class MainMenu : MonoBehaviour
         starcount = PlayerPrefs.GetInt("starVal");
         diacount = PlayerPrefs.GetInt("diaVal");
         ScoreText.text = "star : " + starcount.ToString() + "\n" + "diamond : " + diacount.ToString();
-
-        fakeLoadImage.GetComponent<RectTransform>().DORotate(new Vector3(0, 0, 180), .6f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
     }
     void guestQuery()
     {
@@ -57,8 +59,7 @@ public class MainMenu : MonoBehaviour
             UUIDText.text = Profile.Instance.guestUUID;
             usernameText.text = "childName : " + ConnectionManager.Instance.ChildsName[0] + "\n" + "parentName : " + ConnectionManager.Instance.AuthName;
 
-            _loadingScreenManager.HideLoadingScreen();
-            fakeLoadImage.GetComponent<RectTransform>().DOScale(Vector3.zero, .6f).SetEase(Ease.Linear);
+            DataLoading.Instance.HideLoading();
 
         }
     }
@@ -86,11 +87,27 @@ public class MainMenu : MonoBehaviour
     }
     public void WatchButton()
     {
-        StartCoroutine(Load(2));
+        DataLoading.Instance.ReOp();
+        StartCoroutine(Load(3));
     }
     public void PlayButton()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
+        DataLoading.Instance.loadingScreenManager.RevealLoadingScreen();
+    }
+    public void RegisterPanelButton()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+        RegisterTransform.gameObject.SetActive(true);
+    }
+    public void RegisterButton()
+    {
+
+    }
+    public void RegisterBackButton()
+    {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        RegisterTransform.gameObject.SetActive(false);
     }
     IEnumerator Load(int index)
     {

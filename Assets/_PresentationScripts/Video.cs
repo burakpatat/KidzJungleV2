@@ -63,12 +63,9 @@ public class Video : MonoBehaviour
 
     bool b_IsInteractive = false;
 
-    public LoadingScreenManager _loadingScreenManager;
-    public Transform fakeLoadImage;
     bool LoadingOKForLodingPanel = false;
     void Start()
     {
-        fakeLoadImage.GetComponent<RectTransform>().DORotate(new Vector3(0, 0, 180), .6f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
         StartCoroutine(Fps());
     }
     void InitData()
@@ -148,8 +145,7 @@ public class Video : MonoBehaviour
         if (LoadingOKForLodingPanel == true)
         {
             LoadingOKForLodingPanel = false;
-            _loadingScreenManager.HideLoadingScreen();
-            fakeLoadImage.GetComponent<RectTransform>().DOScale(Vector3.zero, .6f).SetEase(Ease.Linear);
+            DataLoading.Instance.HideLoading();
         }
 
         fpsText.text = "fps: " + Mathf.Round(fps).ToString() + "\n" + "vfr: " + vCR._mediaPlayerB.Info.GetVideoFrameRate();
