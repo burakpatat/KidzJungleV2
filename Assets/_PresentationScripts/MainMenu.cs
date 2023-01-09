@@ -10,6 +10,9 @@ using _Environments._Mutual.Data.State;
 using System.Threading.Tasks;
 
 using DG.Tweening;
+using System.IO;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -28,12 +31,23 @@ public class MainMenu : MonoBehaviour
         }
     }
     #endregion
+
+    private string _cachePath;
+    private void Awake()
+    {
+        Singleton();
+        _cachePath = Application.persistentDataPath + "/Posters";
+    }
+
     public TMP_Text UUIDText;
 
     public TMP_Text usernameText;
     int starcount, diacount;
 
     public TMP_Text ScoreText;
+
+    bool LoadingOKForLodingPanel = false;
+    public Transform Avatar;
 
     [Header("Register")]
     public Transform RegisterTransform;
@@ -58,14 +72,15 @@ public class MainMenu : MonoBehaviour
 
             UUIDText.text = Profile.Instance.guestUUID;
             usernameText.text = "childName : " + ConnectionManager.Instance.ChildsName[0] + "\n" + "parentName : " + ConnectionManager.Instance.AuthName;
-
-            DataLoading.Instance.HideLoading();
-
+            //image
+            StartCoroutine(SetPoster(GetUser.GetMedia() + ConnectionManager.Instance.Avatar, ConnectionManager.Instance.ChildsName[0], Avatar));
         }
-    }
-    private void Awake()
-    {
-        Singleton();
+
+        if (LoadingOKForLodingPanel == true)
+        {
+            LoadingOKForLodingPanel = false;
+            DataLoading.Instance.HideLoading();
+        }
     }
     void Update()
     {
@@ -127,6 +142,60 @@ public class MainMenu : MonoBehaviour
 
             yield return null;
         }
-        
+    }
+    public IEnumerator SetPoster(string url, string name, Transform _intanceObj)
+    {
+        if (!Directory.Exists(_cachePath))
+        {
+            Debug.Log("No directory found for temporary files. Creating one.");
+            Directory.CreateDirectory(_cachePath);
+        }
+
+        string posterPath = _cachePath + "/" + DataTypeExtensions.RemoveDigits(name).ToLower() + "Avatar.poster";
+        bool valid = true;
+        Texture2D _texture = new Texture2D(1080, 1920);
+
+        if (System.IO.File.Exists(posterPath))
+        {
+            Debug.Log("Game visual exist :  " + posterPath);
+            System.TimeSpan since = System.DateTime.Now.Subtract(System.IO.File.GetLastWriteTime(posterPath));
+            if (since.Days >= 1)
+            {
+                valid = false;
+                Debug.Log("But visual is old :  " + since.Days + " days");
+            }
+        }
+        else
+        {
+            Debug.Log("Game visual does not exist :  " + posterPath);
+            valid = false;
+        }
+
+        if (!valid)
+        {
+            Debug.Log("Renewing cached visual for game " + name);
+            UnityWebRequest trq = UnityWebRequest.Get(url);
+            yield return trq.SendWebRequest();
+            if (trq.result == UnityWebRequest.Result.Success)
+            {
+                byte[] result = trq.downloadHandler.data;
+                System.IO.File.WriteAllBytes(posterPath, result);
+                valid = true;
+            }
+
+        }
+
+        if (valid)
+        {
+            _texture.LoadImage(System.IO.File.ReadAllBytes(posterPath));
+
+            Rect rec = new Rect(0, 0, _texture.width, _texture.height);
+            _intanceObj.transform.GetComponent<Image>().sprite = Sprite.Create(_texture, rec, new Vector2(0, 0), 1);
+
+            yield return new WaitForSeconds(.5f);
+            LoadingOKForLodingPanel = true;
+        }
+
+        yield return null;
     }
 }

@@ -49,10 +49,11 @@ namespace _Environments._Mutual.Data
             }
             
         }
-        public static IEnumerator Register(User_Register _datas)
+        public static IEnumerator Register(User_Register _Userdatas, User_RegisterForPostProfile _Profiledatas)
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/users");
-            yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
+            yield return PostData(mainUrl, PostTarget.NEWBASE, _Userdatas);
+            yield return PostData(mainUrl, PostTarget.NEWBASE, _Profiledatas);
             yield return new WaitUntil(() => _POSTResponseResult != "");
 
             if (_POSTResponseResult != null)
@@ -60,6 +61,10 @@ namespace _Environments._Mutual.Data
                 Debug.Log("RegisterOK!");
             }
 
+        }
+        public static string GetMedia()
+        {
+            return ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.FILE, new string[1], "");
         }
     }
 }

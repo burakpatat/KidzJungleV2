@@ -12,11 +12,13 @@ namespace _Environments._Mutual.Connection
     {
         public static IEnumerator GuestUserRegister()
         {
-            User_Register _datas = new User_Register();
-            _datas.email = "guest@mtekbilisim.com";
-            _datas.password = "guest@mtek";
+            User_Register _Userdatas = new User_Register();
+            User_RegisterForPostProfile _Profiledatas = new User_RegisterForPostProfile();
 
-            yield return GetUser.Register(_datas);
+            _Userdatas.email = "guest@mtekbilisim.com";
+            _Userdatas.password = "guest@mtek";
+
+            yield return GetUser.Register(_Userdatas, _Profiledatas);
         }
     }
 }

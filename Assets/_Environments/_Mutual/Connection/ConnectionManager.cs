@@ -48,6 +48,8 @@ namespace _Environments._Mutual.Connection
         private string _ParentName;
         [SerializeField]
         private List<string> _ChildsName;
+        [SerializeField]
+        private string _Avatar;
 
         [HideInInspector] public List<User_Data> _userdatas = new List<User_Data>();
         [HideInInspector] public List<Profile_Data> _profiledatas = new List<Profile_Data>();
@@ -59,6 +61,7 @@ namespace _Environments._Mutual.Connection
         public string AuthName { get => _AuthName; set => _AuthName = value; }
         public string ParentName { get => _ParentName; set => _ParentName = value; }
         public List<string> ChildsName { get => _ChildsName; set => _ChildsName = value; }
+        public string Avatar { get => _Avatar; set => _Avatar = value; }
 
         public bool BaseLoadedOK = false;
 
@@ -143,6 +146,7 @@ namespace _Environments._Mutual.Connection
                             AuthID_KJ = row.profile[i].KJId;
                             AuthName = row.profile[i].name;
                             ParentName = row.profile[i].name;
+                            Avatar = row.avatar;
 
                             for (int a = 0; a < row.profile[i].Child.Count; a++)
                             {
