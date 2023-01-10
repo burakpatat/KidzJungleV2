@@ -49,11 +49,10 @@ namespace _Environments._Mutual.Data
             }
             
         }
-        public static IEnumerator Register(User_Register _Userdatas, User_RegisterForPostProfile _Profiledatas)
+        public static IEnumerator Register(User_Register _Userdatas)
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/users");
             yield return PostData(mainUrl, PostTarget.NEWBASE, _Userdatas);
-            yield return PostData(mainUrl, PostTarget.NEWBASE, _Profiledatas);
             yield return new WaitUntil(() => _POSTResponseResult != "");
 
             if (_POSTResponseResult != null)

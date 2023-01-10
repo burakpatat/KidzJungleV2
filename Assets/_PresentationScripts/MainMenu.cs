@@ -117,7 +117,7 @@ public class MainMenu : MonoBehaviour
     }
     public void RegisterButton()
     {
-
+        StartCoroutine(Register.UserRegister(UsernameIF.text, MailIF.text, PasswordIF.text));
     }
     public void RegisterBackButton()
     {
