@@ -73,33 +73,6 @@ namespace _Environments._Mutual.Data.State
         public User_InteractiveVideoId InteractiveVideo_id;
     }
     [Serializable]
-    public class User_Login
-    {
-        public string email;
-        public string password;  
-    }
-    [Serializable]
-    public class User_Register
-    {
-        public string first_name;
-        public string email;
-        public string password;
-        public string avatar;
-        public string role;
-    }
-    [Serializable]
-    public class User_RegisterForPostProfile
-    {
-        public string name;
-        public string duid;
-        public string KJId;
-    }
-    [Serializable]
-    public class User_RegisterForPostProfileChildSettings
-    {
-        public string childname;
-    }
-    [Serializable]
     public class User_TokenData
     {
         public string access_token;

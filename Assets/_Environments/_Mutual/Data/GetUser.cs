@@ -13,7 +13,8 @@ namespace _Environments._Mutual.Data
         public static UserClass UserClass;
         public static UserTokenClass UserTokenClass;
         public static bool LoginOK = false;
-        
+        public static bool UserCreate = false;
+
         public static IEnumerator GetUserDatas()
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/users?fields=*,profile.*,*,profile.Child.*," +
@@ -33,7 +34,7 @@ namespace _Environments._Mutual.Data
                 Debug.Log("exception:" + ex.Message + ex.InnerException?.Message);
             }
         }
-        public static IEnumerator Login(User_Login _datas)
+        public static IEnumerator Login(AllStateCRUDModel.User_Login _datas)
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/auth/login");
             yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
@@ -49,7 +50,7 @@ namespace _Environments._Mutual.Data
             }
             
         }
-        public static IEnumerator Register(User_Register _Userdatas)
+        public static IEnumerator Register(AllStateCRUDModel.User_Register _Userdatas)
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/users");
             yield return PostData(mainUrl, PostTarget.NEWBASE, _Userdatas);
@@ -58,6 +59,7 @@ namespace _Environments._Mutual.Data
             if (_POSTResponseResult != null)
             {
                 Debug.Log("RegisterOK!");
+                UserCreate = true;
             }
 
         }

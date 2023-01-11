@@ -43,17 +43,6 @@ namespace _Environments._Mutual.Data.State
         public string name;
     }
     [Serializable]
-    public class Post_Profile_Game
-    {
-        public int Content_Limitation_id;
-        public GData Games_id;
-    }
-    [Serializable]
-    public class Delete_Profile_Game
-    {
-        public int id;
-    }
-    [Serializable]
     public class Profile_InteractiveVideoId
     {
         public int id;

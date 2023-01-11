@@ -23,9 +23,9 @@ namespace _Environments._Mutual.Connection
         };
         public static IEnumerator UserRegister(string username, string mail, string password)
         {
-            User_Register _Userdatas = new User_Register();
-            User_RegisterForPostProfile _Profiledatas = new User_RegisterForPostProfile();
-            User_RegisterForPostProfileChildSettings _ProfiledatasChildSettings = new User_RegisterForPostProfileChildSettings();
+            AllStateCRUDModel.User_Register _Userdatas = new AllStateCRUDModel.User_Register();
+            AllStateCRUDModel.User_RegisterForPostProfile _Profiledatas = new AllStateCRUDModel.User_RegisterForPostProfile();
+            AllStateCRUDModel.User_RegisterForPostProfileChildSettings _ProfiledatasChildSettings = new AllStateCRUDModel.User_RegisterForPostProfileChildSettings();
 
             _Userdatas.first_name = username;
             _Userdatas.email = mail;
@@ -38,14 +38,28 @@ namespace _Environments._Mutual.Connection
             _Profiledatas.name = username;
             _Profiledatas.KJId = Profile.Instance.guestUUID;
 
-            System.Guid profileRelationIDforUser = System.Guid.NewGuid();
-            _Profiledatas.duid = profileRelationIDforUser.ToString();
-
-            _ProfiledatasChildSettings.childname = "myChild";
-
             yield return GetUser.Register(_Userdatas);
             yield return GetProfile.UserProfileRegister(_Profiledatas);
-            yield return GetProfile.UserProfileRegisterChildSettings(_ProfiledatasChildSettings);
+
+            yield return new WaitForSeconds(1.2f);
+
+            ConnectionManager.Instance._profiledatas = GetProfile.ProfileClass.data;
+
+            if (GetUser.UserCreate == true)
+            {
+                foreach (var item in ConnectionManager.Instance._profiledatas)
+                {
+                    if(item.name == username)
+                    {
+                        print(item.name);
+                        //_ProfiledatasChildSettings.cid = item.id;
+                        //_ProfiledatasChildSettings.childname = "myChild2";
+                    }
+                }
+                
+            }
+
+            //yield return GetProfile.UserProfileRegisterChildSettings(_ProfiledatasChildSettings);
         }
     }
 }

@@ -180,7 +180,7 @@ public class Game : MonoBehaviour
     }
     IEnumerator PostContentLimitationGames(int contentId, GData game)
     {
-        Post_Profile_Game _datas = new Post_Profile_Game();
+        AllStateCRUDModel.Post_Profile_Game _datas = new AllStateCRUDModel.Post_Profile_Game();
 
         _datas.Content_Limitation_id = contentId;
         _datas.Games_id = game;
@@ -189,7 +189,7 @@ public class Game : MonoBehaviour
     }
     IEnumerator DeleteContentLimitationGames(int gamesId)
     {
-        Delete_Profile_Game _datas = new Delete_Profile_Game();
+        AllStateCRUDModel.Delete_Profile_Game _datas = new AllStateCRUDModel.Delete_Profile_Game();
         _datas.id = gamesId;
         yield return GetProfile.DeleteProfileDatas(_datas, gamesId.ToString());
     }

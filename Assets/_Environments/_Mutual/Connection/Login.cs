@@ -18,7 +18,7 @@ namespace _Environments._Mutual.Connection
         public static bool FirstOpen = false;
         public static IEnumerator GuestUserLogin()
         {
-            User_Login _datas = new User_Login();
+            AllStateCRUDModel.User_Login _datas = new AllStateCRUDModel.User_Login();
 
             _datas.email = "guest@mtekbilisim.com";
             _datas.password = "guest@mtek";

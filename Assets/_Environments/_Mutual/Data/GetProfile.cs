@@ -28,20 +28,20 @@ namespace _Environments._Mutual.Data
                 Debug.Log("exception:" + ex.Message + ex.InnerException?.Message);
             }
         }
-        public static IEnumerator PostProfileDatas(Post_Profile_Game _datas)
+        public static IEnumerator PostProfileDatas(AllStateCRUDModel.Post_Profile_Game _datas)
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/items/Content_Limitation_Games?fields=*,Games_id.*");
             yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
             yield return new WaitUntil(() => _POSTResponseResult != "");
 
         }
-        public static IEnumerator DeleteProfileDatas(Delete_Profile_Game _datas, string DeleteID)
+        public static IEnumerator DeleteProfileDatas(AllStateCRUDModel.Delete_Profile_Game _datas, string DeleteID)
         {
             Debug.Log(Newtonsoft.Json.JsonConvert.SerializeObject(_datas));
             string mainUrl = ConnectionManager.Instance.BaseUrl + Delete_SubUrl(DeleteTarget.DELETEBASE, "/items/Content_Limitation_Games/" + DeleteID);
             yield return DeleteData(mainUrl, DeleteTarget.DELETEBASE, _datas);
         }
-        public static IEnumerator UserProfileRegister(User_RegisterForPostProfile _datas)
+        public static IEnumerator UserProfileRegister(AllStateCRUDModel.User_RegisterForPostProfile _datas)
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/items/Profile");
             yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
@@ -51,7 +51,7 @@ namespace _Environments._Mutual.Data
                 Debug.Log("RegisterOK! -> For Profile Collection");
             }
         }
-        public static IEnumerator UserProfileRegisterChildSettings(User_RegisterForPostProfileChildSettings _datas)
+        public static IEnumerator UserProfileRegisterChildSettings(AllStateCRUDModel.User_RegisterForPostProfileChildSettings _datas)
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/items/ChildSettings");
             yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
