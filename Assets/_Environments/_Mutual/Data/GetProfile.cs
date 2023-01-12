@@ -11,6 +11,7 @@ namespace _Environments._Mutual.Data
     public class GetProfile: AbstractGetData
     {
         public static ProfileClass ProfileClass;
+        public static ChildSettingsClass ChildSettingsClass;
         public static IEnumerator GetProfileDatas()
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/items/Profile?fields=*,Child.*,Child.content_limitation.*,Child.content_limitation.Videos.*,Child.content_limitation.Videos.InteractiveVideo_id.*,Child.content_limitation.Games.*,Child.content_limitation.Games.Games_id.*");
@@ -60,6 +61,37 @@ namespace _Environments._Mutual.Data
             {
                 Debug.Log("RegisterOK! -> For Profile Collection and Child Settings");
             }
+        }
+        public static IEnumerator GetChildSettingsDatas()
+        {
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/items/ChildSettings");
+            yield return GetResultResponse(GetTarget.BASE, new string[1], mainUrl);
+            yield return new WaitUntil(() => _GETResponseResult != "");
+
+            try
+            {
+                ChildSettingsClass _datas = new ChildSettingsClass();
+                _datas = JsonUtility.FromJson<ChildSettingsClass>(_GETResponseResult);
+                ChildSettingsClass = _datas;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.Log("exception:" + ex.Message + ex.InnerException?.Message);
+            }
+        }
+        public static IEnumerator UserProfileRegisterUpdate(AllStateCRUDModel.User_RegisterForPostProfileUpdate _datas, string UpdateID)
+        {
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Update_SubUrl(UpdateTarget.UPDATEBASE, "/items/Profile/" + UpdateID);
+            yield return UpdateData(mainUrl, UpdateTarget.UPDATEBASE, _datas);
+
+            Debug.Log("RegisterOK! -> For Profile Collection Id Updated");
+        }
+        public static IEnumerator UserProfileRegisterChildSettingsUpdate(AllStateCRUDModel.User_RegisterForPostProfileChildSettingsUpdate _datas, string UpdateID)
+        {
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Update_SubUrl(UpdateTarget.UPDATEBASE, "/items/ChildSettings/" + UpdateID);
+            yield return UpdateData(mainUrl, UpdateTarget.UPDATEBASE, _datas);
+
+            Debug.Log("RegisterOK! -> For Profile Collection and Child Settings for Id Updated");
         }
     }
 }

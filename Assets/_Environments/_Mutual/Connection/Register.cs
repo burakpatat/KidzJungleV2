@@ -24,8 +24,12 @@ namespace _Environments._Mutual.Connection
         public static IEnumerator UserRegister(string username, string mail, string password)
         {
             AllStateCRUDModel.User_Register _Userdatas = new AllStateCRUDModel.User_Register();
+
             AllStateCRUDModel.User_RegisterForPostProfile _Profiledatas = new AllStateCRUDModel.User_RegisterForPostProfile();
+            AllStateCRUDModel.User_RegisterForPostProfileUpdate _ProfiledatasUpdate = new AllStateCRUDModel.User_RegisterForPostProfileUpdate();
+
             AllStateCRUDModel.User_RegisterForPostProfileChildSettings _ProfiledatasChildSettings = new AllStateCRUDModel.User_RegisterForPostProfileChildSettings();
+            AllStateCRUDModel.User_RegisterForPostProfileChildSettingsUpdate _ProfiledatasChildSettingsUpdate = new AllStateCRUDModel.User_RegisterForPostProfileChildSettingsUpdate();
 
             _Userdatas.first_name = username;
             _Userdatas.email = mail;
@@ -37,29 +41,68 @@ namespace _Environments._Mutual.Connection
 
             _Profiledatas.name = username;
             _Profiledatas.KJId = Profile.Instance.guestUUID;
-
+            
             yield return GetUser.Register(_Userdatas);
             yield return GetProfile.UserProfileRegister(_Profiledatas);
 
+            System.Guid ChildNameUUID = System.Guid.NewGuid();
+            _ProfiledatasChildSettings.childname = ChildNameUUID.ToString();
+            yield return GetProfile.UserProfileRegisterChildSettings(_ProfiledatasChildSettings);
+
             yield return new WaitForSeconds(1.2f);
 
+            // ------- ALL Relation Settings ------
+
+            string _myKJId = Profile.Instance.guestUUID;
+            int _myProfileId = 0;
+
+            yield return GetProfile.GetProfileDatas();
             ConnectionManager.Instance._profiledatas = GetProfile.ProfileClass.data;
+            foreach (var prow in ConnectionManager.Instance._profiledatas)
+            {
+                if (prow.KJId == _myKJId)
+                {
+                    Debug.Log("Founded KJID...!");
+                    _myProfileId = prow.id;
+                    print("Register My Profile Id : " + _myProfileId);
+                }
+            }
+
+            // ------- User -> Profile Relation (duid) -------
+
+            yield return GetUser.GetUserDatas();
+            ConnectionManager.Instance._userdatas = GetUser.UserClass.data;
+
+            foreach (var item in ConnectionManager.Instance._userdatas)
+            {
+                if(item.first_name == username)
+                {
+                    //**** User -> Profile
+                    _ProfiledatasUpdate.duid = item.id;
+                }
+            }
+            yield return GetProfile.UserProfileRegisterUpdate(_ProfiledatasUpdate, _myProfileId.ToString());
+            // ------- Child Settings Relation -------
+
+            yield return GetProfile.GetChildSettingsDatas();
+            ConnectionManager.Instance._childSettingsDatas = GetProfile.ChildSettingsClass.data;
 
             if (GetUser.UserCreate == true)
             {
-                foreach (var item in ConnectionManager.Instance._profiledatas)
+                string _ChildID_InChildSettings = "";
+                
+                foreach (var item in ConnectionManager.Instance._childSettingsDatas)
                 {
-                    if(item.name == username)
+                    if (item.childname == ChildNameUUID.ToString())
                     {
-                        print(item.name);
-                        //_ProfiledatasChildSettings.cid = item.id;
-                        //_ProfiledatasChildSettings.childname = "myChild2";
+                        Debug.Log("ChildNameOK...!");
+                        _ChildID_InChildSettings = item.id.ToString();
+                        _ProfiledatasChildSettingsUpdate.cid = _myProfileId;
+                        _ProfiledatasChildSettingsUpdate.childname = username + "sChild";
                     }
                 }
-                
+                yield return GetProfile.UserProfileRegisterChildSettingsUpdate(_ProfiledatasChildSettingsUpdate, _ChildID_InChildSettings);
             }
-
-            //yield return GetProfile.UserProfileRegisterChildSettings(_ProfiledatasChildSettings);
         }
     }
 }

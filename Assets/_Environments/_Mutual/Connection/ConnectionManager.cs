@@ -53,6 +53,7 @@ namespace _Environments._Mutual.Connection
 
         [HideInInspector] public List<User_Data> _userdatas = new List<User_Data>();
         [HideInInspector] public List<Profile_Data> _profiledatas = new List<Profile_Data>();
+        [HideInInspector] public List<ChildSettingsData> _childSettingsDatas = new List<ChildSettingsData>();
 
         public string BaseUrl { get => _BaseUrl; set => _BaseUrl = value; }
         public string ActiveToken { get => _ActiveToken; set => _ActiveToken = value; }
@@ -161,8 +162,8 @@ namespace _Environments._Mutual.Connection
         {
             yield return GetGame.GetGameDatas();
             yield return GetVideo.GetVideoDatas();
-            yield return GetProfile.GetProfileDatas();
 
+            yield return GetProfile.GetProfileDatas();
             _profiledatas = GetProfile.ProfileClass.data;
         }
     }

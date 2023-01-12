@@ -62,4 +62,18 @@ namespace _Environments._Mutual.Data.State
             return UnityEngine.JsonUtility.ToJson(this, true);
         }
     }
+
+    //Child Settings
+    [Serializable]
+    public class ChildSettingsData
+    {
+        public int id;
+        public int cid;
+        public string childname;
+    }
+    [Serializable]
+    public class ChildSettingsClass
+    {
+        public List<ChildSettingsData> data;
+    }
 }

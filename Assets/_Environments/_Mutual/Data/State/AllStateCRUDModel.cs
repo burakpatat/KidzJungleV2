@@ -29,14 +29,24 @@ namespace _Environments._Mutual.Data.State
         public class User_RegisterForPostProfile
         {
             public string name;
-            public string duid;
             public string KJId;
+        }
+        [Serializable]
+        public class User_RegisterForPostProfileUpdate
+        {
+            public string duid;
         }
         [Serializable]
         public class User_RegisterForPostProfileChildSettings
         {
+            public string childname;
+        }
+        [Serializable]
+        public class User_RegisterForPostProfileChildSettingsUpdate
+        {
             public int cid;
             public string childname;
+
         }
         [Serializable]
         public class Post_Profile_Game
