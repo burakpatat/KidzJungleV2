@@ -143,7 +143,6 @@ public class Game : MonoBehaviour
     }
     public void ControlGame(int gameId, string childName)
     {
-
         foreach (var row in _datas)
         {
             foreach (var prow in ConnectionManager.Instance._profiledatas)

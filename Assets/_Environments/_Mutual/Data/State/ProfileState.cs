@@ -51,6 +51,7 @@ namespace _Environments._Mutual.Data.State
     [Serializable]
     public class Profile_Video
     {
+        public int id;
         public Profile_InteractiveVideoId InteractiveVideo_id;
     }
     [Serializable]
@@ -75,5 +76,18 @@ namespace _Environments._Mutual.Data.State
     public class ChildSettingsClass
     {
         public List<ChildSettingsData> data;
+    }
+    //Content Limitation
+    [Serializable]
+    public class ContentLimitationData
+    {
+        public int id;
+        public int contentId;
+        public string findId;
+    }
+    [Serializable]
+    public class ContentLimitationClass
+    {
+        public List<ContentLimitationData> data;
     }
 }

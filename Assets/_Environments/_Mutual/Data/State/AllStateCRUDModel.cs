@@ -46,13 +46,28 @@ namespace _Environments._Mutual.Data.State
         {
             public int cid;
             public string childname;
-
+        }
+        [Serializable]
+        public class User_RegisterCreateContentLimitation
+        {
+            public string findId;
+        }
+        [Serializable]
+        public class User_RegisterUpdateContentLimitation
+        {
+            public int contentId;
         }
         [Serializable]
         public class Post_Profile_Game
         {
             public int Content_Limitation_id;
             public GData Games_id;
+        }
+        [Serializable]
+        public class Post_Profile_Video
+        {
+            public int Content_Limitation_id;
+            public Video_Data InteractiveVideo_id;
         }
         [Serializable]
         public class Delete_Profile_Game

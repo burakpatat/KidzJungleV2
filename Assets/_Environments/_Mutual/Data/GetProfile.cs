@@ -12,6 +12,7 @@ namespace _Environments._Mutual.Data
     {
         public static ProfileClass ProfileClass;
         public static ChildSettingsClass ChildSettingsClass;
+        public static ContentLimitationClass ContentLimitationClass;
         public static IEnumerator GetProfileDatas()
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/items/Profile?fields=*,Child.*,Child.content_limitation.*,Child.content_limitation.Videos.*,Child.content_limitation.Videos.InteractiveVideo_id.*,Child.content_limitation.Games.*,Child.content_limitation.Games.Games_id.*");
@@ -92,6 +93,60 @@ namespace _Environments._Mutual.Data
             yield return UpdateData(mainUrl, UpdateTarget.UPDATEBASE, _datas);
 
             Debug.Log("RegisterOK! -> For Profile Collection and Child Settings for Id Updated");
+        }
+        public static IEnumerator GetContentLimitationDatas()
+        {
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/items/Content_Limitation/");
+            yield return GetResultResponse(GetTarget.BASE, new string[1], mainUrl);
+            yield return new WaitUntil(() => _GETResponseResult != "");
+
+            try
+            {
+                ContentLimitationClass _datas = new ContentLimitationClass();
+                _datas = JsonUtility.FromJson<ContentLimitationClass>(_GETResponseResult);
+                ContentLimitationClass = _datas;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.Log("exception:" + ex.Message + ex.InnerException?.Message);
+            }
+        }
+        public static IEnumerator UserProfileRegisterCreateContentLimitation(AllStateCRUDModel.User_RegisterCreateContentLimitation _datas)
+        {
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/items/Content_Limitation/");
+            yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
+            yield return new WaitUntil(() => _POSTResponseResult != "");
+            if (_POSTResponseResult != null)
+            {
+                Debug.Log("RegisterOK! -> Create Content Limitation");
+            }
+        }
+        public static IEnumerator UserProfileRegisterCreateContentLimitationGames(AllStateCRUDModel.Post_Profile_Game _datas)
+        {
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/items/Content_Limitation_Games?fields=*,Games_id.*");
+            yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
+            yield return new WaitUntil(() => _POSTResponseResult != "");
+            if (_POSTResponseResult != null)
+            {
+                Debug.Log("RegisterOK! -> Create Content Limitation Game");
+            }
+        }
+        public static IEnumerator UserProfileRegisterCreateContentLimitationVideo(AllStateCRUDModel.Post_Profile_Video _datas)
+        {
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Post_SubUrl(PostTarget.NEWBASE, new string[1], "/items/Content_Limitation_InteractiveVideo?fields=*,InteractiveVideo_id.*");
+            yield return PostData(mainUrl, PostTarget.NEWBASE, _datas);
+            yield return new WaitUntil(() => _POSTResponseResult != "");
+            if (_POSTResponseResult != null)
+            {
+                Debug.Log("RegisterOK! -> Create Content Limitation Video");
+            }
+        }
+        public static IEnumerator UserProfileRegisterUpdateContentLimitation(AllStateCRUDModel.User_RegisterUpdateContentLimitation _datas, string UpdateID)
+        {
+            string mainUrl = ConnectionManager.Instance.BaseUrl + Update_SubUrl(UpdateTarget.UPDATEBASE, "/items/Content_Limitation/" + UpdateID);
+            yield return UpdateData(mainUrl, UpdateTarget.UPDATEBASE, _datas);
+
+            Debug.Log("RegisterOK! -> Content Limitation for Id Updated");
         }
     }
 }
