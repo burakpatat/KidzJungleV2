@@ -57,6 +57,8 @@ namespace _Environments._Mutual.Connection
         //other
         [HideInInspector] public List<ChildSettingsData> _childSettingsDatas = new List<ChildSettingsData>();
         [HideInInspector] public List<ContentLimitationData> _contentLimitationDatas = new List<ContentLimitationData>();
+        [HideInInspector] public List<GData> _Gamedatas = new List<GData>();
+        [HideInInspector] public List<Video_Data> _Videodatas = new List<Video_Data>();
 
         public string BaseUrl { get => _BaseUrl; set => _BaseUrl = value; }
         public string ActiveToken { get => _ActiveToken; set => _ActiveToken = value; }

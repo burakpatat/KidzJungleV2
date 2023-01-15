@@ -22,8 +22,6 @@ namespace _Environments._Mutual.Connection
             "e25e9a9f-c13c-469d-a019-232c641249c1"
         };
 
-        static List<GData> _Gamedatas = new List<GData>();
-        static List<Video_Data> _Videodatas = new List<Video_Data>();
         static int _ContentLimitationID;
         public static IEnumerator UserRegister(string username, string mail, string password)
         {
@@ -34,9 +32,6 @@ namespace _Environments._Mutual.Connection
 
             AllStateCRUDModel.User_RegisterForPostProfileChildSettings _ProfiledatasChildSettings = new AllStateCRUDModel.User_RegisterForPostProfileChildSettings();
             AllStateCRUDModel.User_RegisterForPostProfileChildSettingsUpdate _ProfiledatasChildSettingsUpdate = new AllStateCRUDModel.User_RegisterForPostProfileChildSettingsUpdate();
-
-            _Gamedatas = GetGame.GameClass.data;
-            _Videodatas = GetVideo.VideoClass.data;
 
             _Userdatas.first_name = username;
             _Userdatas.email = mail;
@@ -149,16 +144,14 @@ namespace _Environments._Mutual.Connection
             AllStateCRUDModel.Post_Profile_Game _postGamedatas = new AllStateCRUDModel.Post_Profile_Game();
             AllStateCRUDModel.Post_Profile_Video _postVideodatas = new AllStateCRUDModel.Post_Profile_Video();
 
-            foreach (var row in _Gamedatas)
-            {
-                _postGamedatas.Content_Limitation_id = _updateID.ToInt32();
-                _postGamedatas.Games_id = row;
-            }
-            foreach (var row in _Videodatas)
-            {
-                _postVideodatas.Content_Limitation_id = _updateID.ToInt32();
-                _postVideodatas.InteractiveVideo_id = row;
-            }
+            ConnectionManager.Instance._Gamedatas = GetGame.GameClass.data;
+            ConnectionManager.Instance._Videodatas = GetVideo.VideoClass.data;
+
+            _postGamedatas.Content_Limitation_id = _updateID.ToInt32();
+            _postGamedatas.Games_id = ConnectionManager.Instance._Gamedatas[0];
+            _postVideodatas.Content_Limitation_id = _updateID.ToInt32();
+            _postVideodatas.InteractiveVideo_id = ConnectionManager.Instance._Videodatas[0];
+
             yield return GetProfile.UserProfileRegisterCreateContentLimitationGames(_postGamedatas);
             yield return GetProfile.UserProfileRegisterCreateContentLimitationVideo(_postVideodatas);
         }

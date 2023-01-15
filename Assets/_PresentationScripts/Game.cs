@@ -182,7 +182,7 @@ public class Game : MonoBehaviour
         AllStateCRUDModel.Post_Profile_Game _datas = new AllStateCRUDModel.Post_Profile_Game();
 
         _datas.Content_Limitation_id = contentId;
-        _datas.Games_id = game;
+       // _datas.Games_id = game;
 
         yield return GetProfile.PostProfileDatas(_datas);
     }
