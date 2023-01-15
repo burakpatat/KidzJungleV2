@@ -166,7 +166,9 @@ namespace _Environments._Mutual.Connection
         IEnumerator DMO()
         {
             yield return GetGame.GetGameDatas();
+            _Gamedatas = GetGame.GameClass.data;
             yield return GetVideo.GetVideoDatas();
+            _Videodatas = GetVideo.VideoClass.data;
 
             yield return GetProfile.GetProfileDatas();
             _profiledatas = GetProfile.ProfileClass.data;

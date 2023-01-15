@@ -144,9 +144,6 @@ namespace _Environments._Mutual.Connection
             AllStateCRUDModel.Post_Profile_Game _postGamedatas = new AllStateCRUDModel.Post_Profile_Game();
             AllStateCRUDModel.Post_Profile_Video _postVideodatas = new AllStateCRUDModel.Post_Profile_Video();
 
-            ConnectionManager.Instance._Gamedatas = GetGame.GameClass.data;
-            ConnectionManager.Instance._Videodatas = GetVideo.VideoClass.data;
-
             _postGamedatas.Content_Limitation_id = _updateID.ToInt32();
             _postGamedatas.Games_id = ConnectionManager.Instance._Gamedatas[0];
             _postVideodatas.Content_Limitation_id = _updateID.ToInt32();
