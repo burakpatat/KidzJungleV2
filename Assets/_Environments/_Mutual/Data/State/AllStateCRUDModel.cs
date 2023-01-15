@@ -74,10 +74,5 @@ namespace _Environments._Mutual.Data.State
         {
             public int id;
         }
-        [Serializable]
-        public class RegisterAfter_ProfileMatchChild
-        {
-
-        }
     }
 }

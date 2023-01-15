@@ -24,6 +24,7 @@ namespace _Environments._Mutual.Connection
 
         static List<GData> _Gamedatas = new List<GData>();
         static List<Video_Data> _Videodatas = new List<Video_Data>();
+        static int _ContentLimitationID;
         public static IEnumerator UserRegister(string username, string mail, string password)
         {
             AllStateCRUDModel.User_Register _Userdatas = new AllStateCRUDModel.User_Register();
@@ -129,44 +130,36 @@ namespace _Environments._Mutual.Connection
         {
             AllStateCRUDModel.User_RegisterCreateContentLimitation _createContentLimitation = new AllStateCRUDModel.User_RegisterCreateContentLimitation();
 
+            _createContentLimitation.findId = _findUUID;
+
+            yield return GetProfile.UserProfileRegisterCreateContentLimitation(_createContentLimitation);
+
+
             AllStateCRUDModel.Post_Profile_Game _postGamedatas = new AllStateCRUDModel.Post_Profile_Game();
             AllStateCRUDModel.Post_Profile_Video _postVideodatas = new AllStateCRUDModel.Post_Profile_Video();
 
             _Gamedatas = GetGame.GameClass.data;
             _Videodatas = GetVideo.VideoClass.data;
 
-            _createContentLimitation.findId = _findUUID;
-
-            yield return GetProfile.UserProfileRegisterCreateContentLimitation(_createContentLimitation);
-
-            /*int _ContentLimitationIDforhiddenGamesTable = 0;
-            int _ContentLimitationIDforhiddenVideoTable = 0;
+            foreach (var item in ConnectionManager.Instance._profiledatas)
+            {
+                if (item.Child[0].childname == "GuestChild")
+                {
+                    _ContentLimitationID = item.Child[0].content_limitation[0].id;
+                }
+            }
             foreach (var row in _Gamedatas)
             {
-                foreach (var item in ConnectionManager.Instance._profiledatas)
-                {
-                    if (item.name == "Guest")
-                    {
-                        _ContentLimitationIDforhiddenGamesTable = item.Child[0].content_limitation[0].id;
-                    }
-                }
-                _postGamedatas.Content_Limitation_id = _ContentLimitationIDforhiddenGamesTable;
+                _postGamedatas.Content_Limitation_id = _ContentLimitationID;
                 _postGamedatas.Games_id = row;
             }
             foreach (var row in _Videodatas)
             {
-                foreach (var item in ConnectionManager.Instance._profiledatas)
-                {
-                    if (item.name == "Guest")
-                    {
-                        _ContentLimitationIDforhiddenVideoTable = item.Child[0].content_limitation[0].id;
-                    }
-                }
-                _postVideodatas.Content_Limitation_id = _ContentLimitationIDforhiddenVideoTable;
+                _postVideodatas.Content_Limitation_id = _ContentLimitationID;
                 _postVideodatas.InteractiveVideo_id = row;
             }
             yield return GetProfile.UserProfileRegisterCreateContentLimitationGames(_postGamedatas);
-            yield return GetProfile.UserProfileRegisterCreateContentLimitationVideo(_postVideodatas);*/
+            yield return GetProfile.UserProfileRegisterCreateContentLimitationVideo(_postVideodatas);
         }
         private static IEnumerator RegisterUpdateContentLimitation(int _childSettingsId, string _updateID)
         {

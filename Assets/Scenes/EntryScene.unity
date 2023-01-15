@@ -162,6 +162,8 @@ MonoBehaviour:
   _Avatar: 
   _userdatas: []
   _profiledatas: []
+  _childSettingsDatas: []
+  _contentLimitationDatas: []
   BaseLoadedOK: 0
   GuestLoginTokenCreated: 0
   GeneralUserLogin: 0
