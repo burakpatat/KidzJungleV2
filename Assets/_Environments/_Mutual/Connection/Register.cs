@@ -35,6 +35,9 @@ namespace _Environments._Mutual.Connection
             AllStateCRUDModel.User_RegisterForPostProfileChildSettings _ProfiledatasChildSettings = new AllStateCRUDModel.User_RegisterForPostProfileChildSettings();
             AllStateCRUDModel.User_RegisterForPostProfileChildSettingsUpdate _ProfiledatasChildSettingsUpdate = new AllStateCRUDModel.User_RegisterForPostProfileChildSettingsUpdate();
 
+            _Gamedatas = GetGame.GameClass.data;
+            _Videodatas = GetVideo.VideoClass.data;
+
             _Userdatas.first_name = username;
             _Userdatas.email = mail;
             _Userdatas.password = password;
@@ -133,33 +136,7 @@ namespace _Environments._Mutual.Connection
             _createContentLimitation.findId = _findUUID;
 
             yield return GetProfile.UserProfileRegisterCreateContentLimitation(_createContentLimitation);
-
-
-            AllStateCRUDModel.Post_Profile_Game _postGamedatas = new AllStateCRUDModel.Post_Profile_Game();
-            AllStateCRUDModel.Post_Profile_Video _postVideodatas = new AllStateCRUDModel.Post_Profile_Video();
-
-            _Gamedatas = GetGame.GameClass.data;
-            _Videodatas = GetVideo.VideoClass.data;
-
-            foreach (var item in ConnectionManager.Instance._profiledatas)
-            {
-                if (item.Child[0].childname == "GuestChild")
-                {
-                    _ContentLimitationID = item.Child[0].content_limitation[0].id;
-                }
-            }
-            foreach (var row in _Gamedatas)
-            {
-                _postGamedatas.Content_Limitation_id = _ContentLimitationID;
-                _postGamedatas.Games_id = row;
-            }
-            foreach (var row in _Videodatas)
-            {
-                _postVideodatas.Content_Limitation_id = _ContentLimitationID;
-                _postVideodatas.InteractiveVideo_id = row;
-            }
-            yield return GetProfile.UserProfileRegisterCreateContentLimitationGames(_postGamedatas);
-            yield return GetProfile.UserProfileRegisterCreateContentLimitationVideo(_postVideodatas);
+           
         }
         private static IEnumerator RegisterUpdateContentLimitation(int _childSettingsId, string _updateID)
         {
@@ -168,6 +145,22 @@ namespace _Environments._Mutual.Connection
             _updateContentLimitation.contentId = _childSettingsId;
 
             yield return GetProfile.UserProfileRegisterUpdateContentLimitation(_updateContentLimitation, _updateID);
+
+            AllStateCRUDModel.Post_Profile_Game _postGamedatas = new AllStateCRUDModel.Post_Profile_Game();
+            AllStateCRUDModel.Post_Profile_Video _postVideodatas = new AllStateCRUDModel.Post_Profile_Video();
+
+            foreach (var row in _Gamedatas)
+            {
+                _postGamedatas.Content_Limitation_id = _updateID.ToInt32();
+                _postGamedatas.Games_id = row;
+            }
+            foreach (var row in _Videodatas)
+            {
+                _postVideodatas.Content_Limitation_id = _updateID.ToInt32();
+                _postVideodatas.InteractiveVideo_id = row;
+            }
+            yield return GetProfile.UserProfileRegisterCreateContentLimitationGames(_postGamedatas);
+            yield return GetProfile.UserProfileRegisterCreateContentLimitationVideo(_postVideodatas);
         }
     }
 }
