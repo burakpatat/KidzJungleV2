@@ -175,7 +175,6 @@ public class Game : MonoBehaviour
             }
 
         }
-
     }
     IEnumerator PostContentLimitationGames(int contentId, GData game)
     {

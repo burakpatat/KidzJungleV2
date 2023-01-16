@@ -71,7 +71,10 @@ namespace _Environments._Mutual.Connection
 
         public bool BaseLoadedOK = false;
 
+        [Header("TOKEN CREATE")]
         public bool GuestLoginTokenCreated = false;
+        public bool UserLoginTokenCreated = false;
+        public string LoginName = "";
 
         public bool GeneralUserLogin = false;
         public void setBaseUrl()
@@ -131,6 +134,14 @@ namespace _Environments._Mutual.Connection
                 if (_userdatas != null)
                 {
                     GeneralUserLogin = true;
+
+                    foreach (var item in _userdatas)
+                    {
+                        if(item.email == Login.LoginMail)
+                        {
+                            LoginName = item.first_name;
+                        }
+                    }
                 }
 
                 if (GeneralUserLogin)
@@ -147,7 +158,7 @@ namespace _Environments._Mutual.Connection
                 {
                     for (int i = 0; i < row.profile.Count; i++)
                     {
-                        if (row.profile[i].name == "Guest")
+                        if (row.profile[i].name == LoginName)
                         {
                             AuthID_KJ = row.profile[i].KJId;
                             AuthName = row.profile[i].name;

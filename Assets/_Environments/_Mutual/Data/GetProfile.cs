@@ -13,6 +13,8 @@ namespace _Environments._Mutual.Data
         public static ProfileClass ProfileClass;
         public static ChildSettingsClass ChildSettingsClass;
         public static ContentLimitationClass ContentLimitationClass;
+
+        public static bool ContentLimitationIDUpdate = false;
         public static IEnumerator GetProfileDatas()
         {
             string mainUrl = ConnectionManager.Instance.BaseUrl + Get_SubUrl(GetTarget.BASE, new string[1], "/items/Profile?fields=*,Child.*,Child.content_limitation.*,Child.content_limitation.Videos.*,Child.content_limitation.Videos.InteractiveVideo_id.*,Child.content_limitation.Games.*,Child.content_limitation.Games.Games_id.*");
@@ -146,6 +148,7 @@ namespace _Environments._Mutual.Data
             string mainUrl = ConnectionManager.Instance.BaseUrl + Update_SubUrl(UpdateTarget.UPDATEBASE, "/items/Content_Limitation/" + UpdateID);
             yield return UpdateData(mainUrl, UpdateTarget.UPDATEBASE, _datas);
 
+            ContentLimitationIDUpdate = true;
             Debug.Log("RegisterOK! -> Content Limitation for Id Updated");
         }
     }

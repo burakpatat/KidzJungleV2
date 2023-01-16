@@ -16,6 +16,8 @@ namespace _Environments._Mutual.Connection
         public static bool TOKENCreated = false;
 
         public static bool FirstOpen = false;
+
+        public static string LoginMail;
         public static IEnumerator GuestUserLogin()
         {
             AllStateCRUDModel.User_Login _datas = new AllStateCRUDModel.User_Login();
@@ -33,11 +35,34 @@ namespace _Environments._Mutual.Connection
             TOKENCreated = true;
 
         }
+        public static IEnumerator UserLogin(string _mailIF, string _passwordIF)
+        {
+            AllStateCRUDModel.User_Login _datas = new AllStateCRUDModel.User_Login();
+
+            _datas.email = _mailIF;
+            _datas.password = _passwordIF;
+
+            LoginMail = _mailIF;
+
+            yield return GetUser.Login(_datas);
+
+            LoginToken = GetUser.UserTokenClass.data.access_token;
+
+            ConnectionManager.Instance.ActiveToken = LoginToken;
+            ConnectionManager.Instance.UserLoginTokenCreated = true;
+
+            TOKENCreated = true;
+
+        }
 
         private void OnApplicationQuit()
         {
             LoginToken = "";
+            LoginMail = "";
             TOKENCreated = false;
+
+            ConnectionManager.Instance.LoginName = "";
+            ConnectionManager.Instance.ActiveToken = "";
         }
     }
 }

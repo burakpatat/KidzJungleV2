@@ -66,7 +66,7 @@ public class MainMenu : MonoBehaviour
     }
     void guestQuery()
     {
-        if (ConnectionManager.Instance.BaseLoadedOK && ConnectionManager.Instance.AuthName == "Guest")
+        if (ConnectionManager.Instance.BaseLoadedOK && ConnectionManager.Instance.AuthName == ConnectionManager.Instance.LoginName)
         {
             ConnectionManager.Instance.BaseLoadedOK = false;
 
