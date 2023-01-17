@@ -18,12 +18,18 @@ namespace _Environments._Mutual.Connection
         public static bool FirstOpen = false;
 
         public static string LoginMail;
+        private void OnEnable()
+        {
+            
+        }
         public static IEnumerator GuestUserLogin()
         {
             AllStateCRUDModel.User_Login _datas = new AllStateCRUDModel.User_Login();
 
             _datas.email = "guest@mtekbilisim.com";
             _datas.password = "guest@mtek";
+
+            LoginMail = "guest@mtekbilisim.com";
 
             yield return GetUser.Login(_datas);
 
@@ -60,9 +66,6 @@ namespace _Environments._Mutual.Connection
             LoginToken = "";
             LoginMail = "";
             TOKENCreated = false;
-
-            ConnectionManager.Instance.LoginName = "";
-            ConnectionManager.Instance.ActiveToken = "";
         }
     }
 }
